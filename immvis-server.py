@@ -1,15 +1,31 @@
 from concurrent import futures
 import time
 import grpc
+import pandas as pd
 import immvis_pb2
 import immvis_pb2_grpc
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
+data_frame = None
+
 class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
     def OpenDatasetFile(self, request, content):
-        print("Received request!" + request.filePath)
-        return immvis_pb2.OpenDatasetFileResponse(responseCode=0)
+        file_path = request.filePath
+
+        responseCode = 0
+
+        try:
+            if "csv" in file_path:
+                data_frame = pd.read_csv(file_path)
+            elif "json" in file_path:
+                data_frame = pd.read_json(file_path)
+            else:
+                responseCode = 1
+        except:
+            responseCode = 2
+
+        return immvis_pb2.OpenDatasetFileResponse(responseCode=responseCode)
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
