@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+service DataServer {
+    rpc GetData(DataRequest) returns (stream DataPoint) {}
+    rpc GetIrisDataset(Empty) returns (stream IrisDataPoint) {}
+}
+
+message DataRequest {
+    int32 pointsamount = 1;
+}
+
+message Empty {}
+
+
+message DataPoint {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+message IrisDataPoint {
+    double sepal_length = 1;
+    double sepal_width = 2; 
+    double petal_length = 3;
+    double petal_width = 4;
+    string species = 5;
+}
