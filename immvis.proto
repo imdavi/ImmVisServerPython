@@ -2,6 +2,7 @@ syntax = "proto3";
 
 service ImmVis {
     rpc OpenDatasetFile(OpenDatasetFileRequest) returns (OpenDatasetFileResponse) {}
+    rpc GetDatasetDimensions(Void) returns (stream DimensionInfo) {}
 }
 
 message Void {}
@@ -12,4 +13,9 @@ message OpenDatasetFileRequest {
 
 message OpenDatasetFileResponse {
     int32 responseCode = 1;
+}
+
+message DimensionInfo {
+    string name = 1;
+    string type = 2;
 }

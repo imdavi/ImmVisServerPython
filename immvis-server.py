@@ -7,9 +7,9 @@ import immvis_pb2_grpc
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
-data_frame = None
-
 class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
+    data_frame = None
+
     def OpenDatasetFile(self, request, content):
         file_path = request.filePath
 
@@ -17,15 +17,24 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
 
         try:
             if "csv" in file_path:
-                data_frame = pd.read_csv(file_path)
+                self.data_frame = pd.read_csv(file_path)
             elif "json" in file_path:
-                data_frame = pd.read_json(file_path)
+                self.data_frame = pd.read_json(file_path)
             else:
                 responseCode = 1
         except:
             responseCode = 2
 
         return immvis_pb2.OpenDatasetFileResponse(responseCode=responseCode)
+
+    def GetDatasetDimensions(self, request, content):
+        if self.data_frame is None:
+            raise Exception("Failed to get dimensions.")
+
+        types = self.data_frame.dtypes
+        
+        for column in self.data_frame:
+            yield immvis_pb2.DimensionInfo(name=column, type=str(types[column]))
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

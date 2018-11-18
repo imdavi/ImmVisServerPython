@@ -19,6 +19,11 @@ class ImmVisStub(object):
         request_serializer=immvis__pb2.OpenDatasetFileRequest.SerializeToString,
         response_deserializer=immvis__pb2.OpenDatasetFileResponse.FromString,
         )
+    self.GetDatasetDimensions = channel.unary_stream(
+        '/ImmVis/GetDatasetDimensions',
+        request_serializer=immvis__pb2.Void.SerializeToString,
+        response_deserializer=immvis__pb2.DimensionInfo.FromString,
+        )
 
 
 class ImmVisServicer(object):
@@ -32,6 +37,13 @@ class ImmVisServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def GetDatasetDimensions(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_ImmVisServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -39,6 +51,11 @@ def add_ImmVisServicer_to_server(servicer, server):
           servicer.OpenDatasetFile,
           request_deserializer=immvis__pb2.OpenDatasetFileRequest.FromString,
           response_serializer=immvis__pb2.OpenDatasetFileResponse.SerializeToString,
+      ),
+      'GetDatasetDimensions': grpc.unary_stream_rpc_method_handler(
+          servicer.GetDatasetDimensions,
+          request_deserializer=immvis__pb2.Void.FromString,
+          response_serializer=immvis__pb2.DimensionInfo.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
