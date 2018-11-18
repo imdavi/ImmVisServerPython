@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+service ImmVis {
+    rpc OpenDatasetFile(OpenDatasetFileRequest) returns (OpenDatasetFileResponse) {}
+}
+
+message Void {}
+
+message OpenDatasetFileRequest {
+    string filePath = 1;
+}
+
+message OpenDatasetFileResponse {
+    int32 responseCode = 1;
+}
