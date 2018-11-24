@@ -26,8 +26,28 @@ class ImmVisStub(object):
         )
     self.GetDimensionFloatValues = channel.unary_stream(
         '/ImmVis/GetDimensionFloatValues',
-        request_serializer=immvis__pb2.GetDimension.SerializeToString,
+        request_serializer=immvis__pb2.Dimension.SerializeToString,
         response_deserializer=immvis__pb2.FloatDimensionValue.FromString,
+        )
+    self.GetDimensionFloatHead = channel.unary_stream(
+        '/ImmVis/GetDimensionFloatHead',
+        request_serializer=immvis__pb2.Dimension.SerializeToString,
+        response_deserializer=immvis__pb2.FloatDimensionValue.FromString,
+        )
+    self.GetDimensionFloatTail = channel.unary_stream(
+        '/ImmVis/GetDimensionFloatTail',
+        request_serializer=immvis__pb2.Dimension.SerializeToString,
+        response_deserializer=immvis__pb2.FloatDimensionValue.FromString,
+        )
+    self.GetDimensionStringValues = channel.unary_stream(
+        '/ImmVis/GetDimensionStringValues',
+        request_serializer=immvis__pb2.Dimension.SerializeToString,
+        response_deserializer=immvis__pb2.StringDimensionValue.FromString,
+        )
+    self.GetDimensionDescriptiveStatistics = channel.unary_stream(
+        '/ImmVis/GetDimensionDescriptiveStatistics',
+        request_serializer=immvis__pb2.Dimension.SerializeToString,
+        response_deserializer=immvis__pb2.Feature.FromString,
         )
 
 
@@ -56,6 +76,34 @@ class ImmVisServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def GetDimensionFloatHead(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetDimensionFloatTail(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetDimensionStringValues(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetDimensionDescriptiveStatistics(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_ImmVisServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -71,8 +119,28 @@ def add_ImmVisServicer_to_server(servicer, server):
       ),
       'GetDimensionFloatValues': grpc.unary_stream_rpc_method_handler(
           servicer.GetDimensionFloatValues,
-          request_deserializer=immvis__pb2.GetDimension.FromString,
+          request_deserializer=immvis__pb2.Dimension.FromString,
           response_serializer=immvis__pb2.FloatDimensionValue.SerializeToString,
+      ),
+      'GetDimensionFloatHead': grpc.unary_stream_rpc_method_handler(
+          servicer.GetDimensionFloatHead,
+          request_deserializer=immvis__pb2.Dimension.FromString,
+          response_serializer=immvis__pb2.FloatDimensionValue.SerializeToString,
+      ),
+      'GetDimensionFloatTail': grpc.unary_stream_rpc_method_handler(
+          servicer.GetDimensionFloatTail,
+          request_deserializer=immvis__pb2.Dimension.FromString,
+          response_serializer=immvis__pb2.FloatDimensionValue.SerializeToString,
+      ),
+      'GetDimensionStringValues': grpc.unary_stream_rpc_method_handler(
+          servicer.GetDimensionStringValues,
+          request_deserializer=immvis__pb2.Dimension.FromString,
+          response_serializer=immvis__pb2.StringDimensionValue.SerializeToString,
+      ),
+      'GetDimensionDescriptiveStatistics': grpc.unary_stream_rpc_method_handler(
+          servicer.GetDimensionDescriptiveStatistics,
+          request_deserializer=immvis__pb2.Dimension.FromString,
+          response_serializer=immvis__pb2.Feature.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

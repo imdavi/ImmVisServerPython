@@ -2,8 +2,18 @@ syntax = "proto3";
 
 service ImmVis {
     rpc OpenDatasetFile(OpenDatasetFileRequest) returns (OpenDatasetFileResponse) {}
+    
     rpc GetDatasetDimensions(Void) returns (stream DimensionInfo) {}
-    rpc GetDimensionFloatValues(GetDimension) returns (stream FloatDimensionValue) {}
+
+    rpc GetDimensionFloatValues(Dimension) returns (stream FloatDimensionValue) {}
+
+    rpc GetDimensionFloatHead(Dimension) returns (stream FloatDimensionValue) {}
+
+    rpc GetDimensionFloatTail(Dimension) returns (stream FloatDimensionValue) {}
+    
+    rpc GetDimensionStringValues(Dimension) returns (stream StringDimensionValue) {}
+
+    rpc GetDimensionDescriptiveStatistics(Dimension) returns (stream Feature) {}
 }
 
 message Void {}
@@ -21,10 +31,20 @@ message DimensionInfo {
     string type = 2;
 }
 
-message GetDimension {
-    string dimensionName = 1;
+message Dimension {
+    string name = 1;
 }
 
 message FloatDimensionValue {
     float value = 1;
+}
+
+message StringDimensionValue {
+    string value = 1;
+}
+
+message Feature {
+    string name = 1;
+    string value = 2;
+    string type = 3;
 }

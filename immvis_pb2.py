@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cimmvis.proto\"\x06\n\x04Void\"*\n\x16OpenDatasetFileRequest\x12\x10\n\x08\x66ilePath\x18\x01 \x01(\t\"/\n\x17OpenDatasetFileResponse\x12\x14\n\x0cresponseCode\x18\x01 \x01(\x05\"+\n\rDimensionInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"%\n\x0cGetDimension\x12\x15\n\rdimensionName\x18\x01 \x01(\t\"$\n\x13\x46loatDimensionValue\x12\r\n\x05value\x18\x01 \x01(\x02\x32\xc7\x01\n\x06ImmVis\x12\x46\n\x0fOpenDatasetFile\x12\x17.OpenDatasetFileRequest\x1a\x18.OpenDatasetFileResponse\"\x00\x12\x31\n\x14GetDatasetDimensions\x12\x05.Void\x1a\x0e.DimensionInfo\"\x00\x30\x01\x12\x42\n\x17GetDimensionFloatValues\x12\r.GetDimension\x1a\x14.FloatDimensionValue\"\x00\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0cimmvis.proto\"\x06\n\x04Void\"*\n\x16OpenDatasetFileRequest\x12\x10\n\x08\x66ilePath\x18\x01 \x01(\t\"/\n\x17OpenDatasetFileResponse\x12\x14\n\x0cresponseCode\x18\x01 \x01(\x05\"+\n\rDimensionInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"\x19\n\tDimension\x12\x0c\n\x04name\x18\x01 \x01(\t\"$\n\x13\x46loatDimensionValue\x12\r\n\x05value\x18\x01 \x01(\x02\"%\n\x14StringDimensionValue\x12\r\n\x05value\x18\x01 \x01(\t\"4\n\x07\x46\x65\x61ture\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t2\xc4\x03\n\x06ImmVis\x12\x46\n\x0fOpenDatasetFile\x12\x17.OpenDatasetFileRequest\x1a\x18.OpenDatasetFileResponse\"\x00\x12\x31\n\x14GetDatasetDimensions\x12\x05.Void\x1a\x0e.DimensionInfo\"\x00\x30\x01\x12?\n\x17GetDimensionFloatValues\x12\n.Dimension\x1a\x14.FloatDimensionValue\"\x00\x30\x01\x12=\n\x15GetDimensionFloatHead\x12\n.Dimension\x1a\x14.FloatDimensionValue\"\x00\x30\x01\x12=\n\x15GetDimensionFloatTail\x12\n.Dimension\x1a\x14.FloatDimensionValue\"\x00\x30\x01\x12\x41\n\x18GetDimensionStringValues\x12\n.Dimension\x1a\x15.StringDimensionValue\"\x00\x30\x01\x12=\n!GetDimensionDescriptiveStatistics\x12\n.Dimension\x1a\x08.Feature\"\x00\x30\x01\x62\x06proto3')
 )
 
 
@@ -149,15 +149,15 @@ _DIMENSIONINFO = _descriptor.Descriptor(
 )
 
 
-_GETDIMENSION = _descriptor.Descriptor(
-  name='GetDimension',
-  full_name='GetDimension',
+_DIMENSION = _descriptor.Descriptor(
+  name='Dimension',
+  full_name='Dimension',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='dimensionName', full_name='GetDimension.dimensionName', index=0,
+      name='name', full_name='Dimension.name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -176,7 +176,7 @@ _GETDIMENSION = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=162,
-  serialized_end=199,
+  serialized_end=187,
 )
 
 
@@ -206,16 +206,94 @@ _FLOATDIMENSIONVALUE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=201,
-  serialized_end=237,
+  serialized_start=189,
+  serialized_end=225,
+)
+
+
+_STRINGDIMENSIONVALUE = _descriptor.Descriptor(
+  name='StringDimensionValue',
+  full_name='StringDimensionValue',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='value', full_name='StringDimensionValue.value', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=227,
+  serialized_end=264,
+)
+
+
+_FEATURE = _descriptor.Descriptor(
+  name='Feature',
+  full_name='Feature',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='Feature.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='Feature.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='Feature.type', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=266,
+  serialized_end=318,
 )
 
 DESCRIPTOR.message_types_by_name['Void'] = _VOID
 DESCRIPTOR.message_types_by_name['OpenDatasetFileRequest'] = _OPENDATASETFILEREQUEST
 DESCRIPTOR.message_types_by_name['OpenDatasetFileResponse'] = _OPENDATASETFILERESPONSE
 DESCRIPTOR.message_types_by_name['DimensionInfo'] = _DIMENSIONINFO
-DESCRIPTOR.message_types_by_name['GetDimension'] = _GETDIMENSION
+DESCRIPTOR.message_types_by_name['Dimension'] = _DIMENSION
 DESCRIPTOR.message_types_by_name['FloatDimensionValue'] = _FLOATDIMENSIONVALUE
+DESCRIPTOR.message_types_by_name['StringDimensionValue'] = _STRINGDIMENSIONVALUE
+DESCRIPTOR.message_types_by_name['Feature'] = _FEATURE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Void = _reflection.GeneratedProtocolMessageType('Void', (_message.Message,), dict(
@@ -246,12 +324,12 @@ DimensionInfo = _reflection.GeneratedProtocolMessageType('DimensionInfo', (_mess
   ))
 _sym_db.RegisterMessage(DimensionInfo)
 
-GetDimension = _reflection.GeneratedProtocolMessageType('GetDimension', (_message.Message,), dict(
-  DESCRIPTOR = _GETDIMENSION,
+Dimension = _reflection.GeneratedProtocolMessageType('Dimension', (_message.Message,), dict(
+  DESCRIPTOR = _DIMENSION,
   __module__ = 'immvis_pb2'
-  # @@protoc_insertion_point(class_scope:GetDimension)
+  # @@protoc_insertion_point(class_scope:Dimension)
   ))
-_sym_db.RegisterMessage(GetDimension)
+_sym_db.RegisterMessage(Dimension)
 
 FloatDimensionValue = _reflection.GeneratedProtocolMessageType('FloatDimensionValue', (_message.Message,), dict(
   DESCRIPTOR = _FLOATDIMENSIONVALUE,
@@ -259,6 +337,20 @@ FloatDimensionValue = _reflection.GeneratedProtocolMessageType('FloatDimensionVa
   # @@protoc_insertion_point(class_scope:FloatDimensionValue)
   ))
 _sym_db.RegisterMessage(FloatDimensionValue)
+
+StringDimensionValue = _reflection.GeneratedProtocolMessageType('StringDimensionValue', (_message.Message,), dict(
+  DESCRIPTOR = _STRINGDIMENSIONVALUE,
+  __module__ = 'immvis_pb2'
+  # @@protoc_insertion_point(class_scope:StringDimensionValue)
+  ))
+_sym_db.RegisterMessage(StringDimensionValue)
+
+Feature = _reflection.GeneratedProtocolMessageType('Feature', (_message.Message,), dict(
+  DESCRIPTOR = _FEATURE,
+  __module__ = 'immvis_pb2'
+  # @@protoc_insertion_point(class_scope:Feature)
+  ))
+_sym_db.RegisterMessage(Feature)
 
 
 
@@ -268,8 +360,8 @@ _IMMVIS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=240,
-  serialized_end=439,
+  serialized_start=321,
+  serialized_end=773,
   methods=[
   _descriptor.MethodDescriptor(
     name='OpenDatasetFile',
@@ -294,8 +386,44 @@ _IMMVIS = _descriptor.ServiceDescriptor(
     full_name='ImmVis.GetDimensionFloatValues',
     index=2,
     containing_service=None,
-    input_type=_GETDIMENSION,
+    input_type=_DIMENSION,
     output_type=_FLOATDIMENSIONVALUE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetDimensionFloatHead',
+    full_name='ImmVis.GetDimensionFloatHead',
+    index=3,
+    containing_service=None,
+    input_type=_DIMENSION,
+    output_type=_FLOATDIMENSIONVALUE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetDimensionFloatTail',
+    full_name='ImmVis.GetDimensionFloatTail',
+    index=4,
+    containing_service=None,
+    input_type=_DIMENSION,
+    output_type=_FLOATDIMENSIONVALUE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetDimensionStringValues',
+    full_name='ImmVis.GetDimensionStringValues',
+    index=5,
+    containing_service=None,
+    input_type=_DIMENSION,
+    output_type=_STRINGDIMENSIONVALUE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetDimensionDescriptiveStatistics',
+    full_name='ImmVis.GetDimensionDescriptiveStatistics',
+    index=6,
+    containing_service=None,
+    input_type=_DIMENSION,
+    output_type=_FEATURE,
     serialized_options=None,
   ),
 ])
