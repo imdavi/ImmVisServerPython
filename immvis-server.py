@@ -2,6 +2,7 @@ from concurrent import futures
 import time
 import grpc
 import pandas as pd
+import pandas.api.types as ptypes
 import immvis_pb2
 import immvis_pb2_grpc
 
@@ -35,6 +36,20 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
         
         for column in self.data_frame:
             yield immvis_pb2.DimensionInfo(name=column, type=str(types[column]))
+
+    def GetDimensionFloatValues(self, request, content):
+        dimension_name = request.dimensionName
+        
+        dimension_series = self.data_frame[dimension_name]
+        
+        is_float_dimension = ptypes.is_float_dtype(dimension_series)
+
+        if not is_float_dimension:
+            raise Exception("The type of the dimension '" + dimension_name + "is not float.")
+
+        for value in dimension_series:
+            yield immvis_pb2.FloatDimensionValue(value=value)
+
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cimmvis.proto\"\x06\n\x04Void\"*\n\x16OpenDatasetFileRequest\x12\x10\n\x08\x66ilePath\x18\x01 \x01(\t\"/\n\x17OpenDatasetFileResponse\x12\x14\n\x0cresponseCode\x18\x01 \x01(\x05\"+\n\rDimensionInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t2\x83\x01\n\x06ImmVis\x12\x46\n\x0fOpenDatasetFile\x12\x17.OpenDatasetFileRequest\x1a\x18.OpenDatasetFileResponse\"\x00\x12\x31\n\x14GetDatasetDimensions\x12\x05.Void\x1a\x0e.DimensionInfo\"\x00\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0cimmvis.proto\"\x06\n\x04Void\"*\n\x16OpenDatasetFileRequest\x12\x10\n\x08\x66ilePath\x18\x01 \x01(\t\"/\n\x17OpenDatasetFileResponse\x12\x14\n\x0cresponseCode\x18\x01 \x01(\x05\"+\n\rDimensionInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"%\n\x0cGetDimension\x12\x15\n\rdimensionName\x18\x01 \x01(\t\"$\n\x13\x46loatDimensionValue\x12\r\n\x05value\x18\x01 \x01(\x02\x32\xc7\x01\n\x06ImmVis\x12\x46\n\x0fOpenDatasetFile\x12\x17.OpenDatasetFileRequest\x1a\x18.OpenDatasetFileResponse\"\x00\x12\x31\n\x14GetDatasetDimensions\x12\x05.Void\x1a\x0e.DimensionInfo\"\x00\x30\x01\x12\x42\n\x17GetDimensionFloatValues\x12\r.GetDimension\x1a\x14.FloatDimensionValue\"\x00\x30\x01\x62\x06proto3')
 )
 
 
@@ -148,10 +148,74 @@ _DIMENSIONINFO = _descriptor.Descriptor(
   serialized_end=160,
 )
 
+
+_GETDIMENSION = _descriptor.Descriptor(
+  name='GetDimension',
+  full_name='GetDimension',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='dimensionName', full_name='GetDimension.dimensionName', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=162,
+  serialized_end=199,
+)
+
+
+_FLOATDIMENSIONVALUE = _descriptor.Descriptor(
+  name='FloatDimensionValue',
+  full_name='FloatDimensionValue',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='value', full_name='FloatDimensionValue.value', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=201,
+  serialized_end=237,
+)
+
 DESCRIPTOR.message_types_by_name['Void'] = _VOID
 DESCRIPTOR.message_types_by_name['OpenDatasetFileRequest'] = _OPENDATASETFILEREQUEST
 DESCRIPTOR.message_types_by_name['OpenDatasetFileResponse'] = _OPENDATASETFILERESPONSE
 DESCRIPTOR.message_types_by_name['DimensionInfo'] = _DIMENSIONINFO
+DESCRIPTOR.message_types_by_name['GetDimension'] = _GETDIMENSION
+DESCRIPTOR.message_types_by_name['FloatDimensionValue'] = _FLOATDIMENSIONVALUE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Void = _reflection.GeneratedProtocolMessageType('Void', (_message.Message,), dict(
@@ -182,6 +246,20 @@ DimensionInfo = _reflection.GeneratedProtocolMessageType('DimensionInfo', (_mess
   ))
 _sym_db.RegisterMessage(DimensionInfo)
 
+GetDimension = _reflection.GeneratedProtocolMessageType('GetDimension', (_message.Message,), dict(
+  DESCRIPTOR = _GETDIMENSION,
+  __module__ = 'immvis_pb2'
+  # @@protoc_insertion_point(class_scope:GetDimension)
+  ))
+_sym_db.RegisterMessage(GetDimension)
+
+FloatDimensionValue = _reflection.GeneratedProtocolMessageType('FloatDimensionValue', (_message.Message,), dict(
+  DESCRIPTOR = _FLOATDIMENSIONVALUE,
+  __module__ = 'immvis_pb2'
+  # @@protoc_insertion_point(class_scope:FloatDimensionValue)
+  ))
+_sym_db.RegisterMessage(FloatDimensionValue)
+
 
 
 _IMMVIS = _descriptor.ServiceDescriptor(
@@ -190,8 +268,8 @@ _IMMVIS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=163,
-  serialized_end=294,
+  serialized_start=240,
+  serialized_end=439,
   methods=[
   _descriptor.MethodDescriptor(
     name='OpenDatasetFile',
@@ -209,6 +287,15 @@ _IMMVIS = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_VOID,
     output_type=_DIMENSIONINFO,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetDimensionFloatValues',
+    full_name='ImmVis.GetDimensionFloatValues',
+    index=2,
+    containing_service=None,
+    input_type=_GETDIMENSION,
+    output_type=_FLOATDIMENSIONVALUE,
     serialized_options=None,
   ),
 ])

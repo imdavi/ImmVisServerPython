@@ -24,6 +24,11 @@ class ImmVisStub(object):
         request_serializer=immvis__pb2.Void.SerializeToString,
         response_deserializer=immvis__pb2.DimensionInfo.FromString,
         )
+    self.GetDimensionFloatValues = channel.unary_stream(
+        '/ImmVis/GetDimensionFloatValues',
+        request_serializer=immvis__pb2.GetDimension.SerializeToString,
+        response_deserializer=immvis__pb2.FloatDimensionValue.FromString,
+        )
 
 
 class ImmVisServicer(object):
@@ -44,6 +49,13 @@ class ImmVisServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def GetDimensionFloatValues(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_ImmVisServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -56,6 +68,11 @@ def add_ImmVisServicer_to_server(servicer, server):
           servicer.GetDatasetDimensions,
           request_deserializer=immvis__pb2.Void.FromString,
           response_serializer=immvis__pb2.DimensionInfo.SerializeToString,
+      ),
+      'GetDimensionFloatValues': grpc.unary_stream_rpc_method_handler(
+          servicer.GetDimensionFloatValues,
+          request_deserializer=immvis__pb2.GetDimension.FromString,
+          response_serializer=immvis__pb2.FloatDimensionValue.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
