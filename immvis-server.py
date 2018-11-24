@@ -86,7 +86,7 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
         if not is_string_dimension:
             raise Exception("The type of the dimension '" + dimension_name + "is not float.")
 
-        for value in dimension_series.tail():
+        for value in dimension_series:
             yield immvis_pb2.StringDimensionValue(value=value)
     
     def GetDimensionDescriptiveStatistics(self, request, content):
