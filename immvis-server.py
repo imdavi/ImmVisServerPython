@@ -37,57 +37,12 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
         for column in self.data_frame:
             yield immvis_pb2.DimensionInfo(name=column, type=str(types[column]))
 
-    def GetDimensionFloatValues(self, request, content):
+    def GetDimensionInfo(self, request, content):
         dimension_name = request.name
-        
+
         dimension_series = self.data_frame[dimension_name]
-        
-        is_float_dimension = ptypes.is_float_dtype(dimension_series)
 
-        if not is_float_dimension:
-            raise Exception("The type of the dimension '" + dimension_name + "is not float.")
-
-        for value in dimension_series:
-            yield immvis_pb2.FloatDimensionValue(value=value)
-
-    def GetDimensionFloatHead(self, request, content):
-        dimension_name = request.name
-        
-        dimension_series = self.data_frame[dimension_name]
-        
-        is_float_dimension = ptypes.is_float_dtype(dimension_series)
-
-        if not is_float_dimension:
-            raise Exception("The type of the dimension '" + dimension_name + "is not float.")
-
-        for value in dimension_series.head():
-            yield immvis_pb2.FloatDimensionValue(value=value)
-
-    def GetDimensionFloatTail(self, request, content):
-        dimension_name = request.name
-        
-        dimension_series = self.data_frame[dimension_name]
-        
-        is_float_dimension = ptypes.is_float_dtype(dimension_series)
-
-        if not is_float_dimension:
-            raise Exception("The type of the dimension '" + dimension_name + "is not float.")
-
-        for value in dimension_series.tail():
-            yield immvis_pb2.FloatDimensionValue(value=value)
-
-    def GetDimensionStringValues(self, request, content):
-        dimension_name = request.name
-        
-        dimension_series = self.data_frame[dimension_name]
-        
-        is_string_dimension = ptypes.is_string_dtype(dimension_series)
-
-        if not is_string_dimension:
-            raise Exception("The type of the dimension '" + dimension_name + "is not float.")
-
-        for value in dimension_series:
-            yield immvis_pb2.StringDimensionValue(value=value)
+        return str(dimension_series.dtype)
     
     def GetDimensionDescriptiveStatistics(self, request, content):
         dimension_name = request.name
@@ -98,6 +53,18 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
             feature_value = str(desc_stats[feature_name])
             feature_type = str(type(desc_stats[feature_name]))
             yield immvis_pb2.Feature(name=feature_name, value=feature_value, type=feature_type)
+    
+    def GetDimensionData(self, request_iterator, context):
+        for dimension in request_iterator:
+            dimension_name = dimension.name
+
+            dimension_series = self.data_frame[dimension_name]
+
+            dimension_type = str(dimension_series.dtype)
+
+            dimension_data = [str(value) for value in dimension_series.values]
+
+            yield immvis_pb2.DimensionData(name=dimension_name, type=dimension_type, data=dimension_data)
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

@@ -24,30 +24,20 @@ class ImmVisStub(object):
         request_serializer=immvis__pb2.Void.SerializeToString,
         response_deserializer=immvis__pb2.DimensionInfo.FromString,
         )
-    self.GetDimensionFloatValues = channel.unary_stream(
-        '/ImmVis/GetDimensionFloatValues',
-        request_serializer=immvis__pb2.Dimension.SerializeToString,
-        response_deserializer=immvis__pb2.FloatDimensionValue.FromString,
-        )
-    self.GetDimensionFloatHead = channel.unary_stream(
-        '/ImmVis/GetDimensionFloatHead',
-        request_serializer=immvis__pb2.Dimension.SerializeToString,
-        response_deserializer=immvis__pb2.FloatDimensionValue.FromString,
-        )
-    self.GetDimensionFloatTail = channel.unary_stream(
-        '/ImmVis/GetDimensionFloatTail',
-        request_serializer=immvis__pb2.Dimension.SerializeToString,
-        response_deserializer=immvis__pb2.FloatDimensionValue.FromString,
-        )
-    self.GetDimensionStringValues = channel.unary_stream(
-        '/ImmVis/GetDimensionStringValues',
-        request_serializer=immvis__pb2.Dimension.SerializeToString,
-        response_deserializer=immvis__pb2.StringDimensionValue.FromString,
-        )
     self.GetDimensionDescriptiveStatistics = channel.unary_stream(
         '/ImmVis/GetDimensionDescriptiveStatistics',
         request_serializer=immvis__pb2.Dimension.SerializeToString,
         response_deserializer=immvis__pb2.Feature.FromString,
+        )
+    self.GetDimensionInfo = channel.unary_unary(
+        '/ImmVis/GetDimensionInfo',
+        request_serializer=immvis__pb2.Dimension.SerializeToString,
+        response_deserializer=immvis__pb2.DimensionInfo.FromString,
+        )
+    self.GetDimensionData = channel.stream_stream(
+        '/ImmVis/GetDimensionData',
+        request_serializer=immvis__pb2.Dimension.SerializeToString,
+        response_deserializer=immvis__pb2.DimensionData.FromString,
         )
 
 
@@ -69,35 +59,21 @@ class ImmVisServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def GetDimensionFloatValues(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def GetDimensionFloatHead(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def GetDimensionFloatTail(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def GetDimensionStringValues(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
   def GetDimensionDescriptiveStatistics(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetDimensionInfo(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetDimensionData(self, request_iterator, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -117,30 +93,20 @@ def add_ImmVisServicer_to_server(servicer, server):
           request_deserializer=immvis__pb2.Void.FromString,
           response_serializer=immvis__pb2.DimensionInfo.SerializeToString,
       ),
-      'GetDimensionFloatValues': grpc.unary_stream_rpc_method_handler(
-          servicer.GetDimensionFloatValues,
-          request_deserializer=immvis__pb2.Dimension.FromString,
-          response_serializer=immvis__pb2.FloatDimensionValue.SerializeToString,
-      ),
-      'GetDimensionFloatHead': grpc.unary_stream_rpc_method_handler(
-          servicer.GetDimensionFloatHead,
-          request_deserializer=immvis__pb2.Dimension.FromString,
-          response_serializer=immvis__pb2.FloatDimensionValue.SerializeToString,
-      ),
-      'GetDimensionFloatTail': grpc.unary_stream_rpc_method_handler(
-          servicer.GetDimensionFloatTail,
-          request_deserializer=immvis__pb2.Dimension.FromString,
-          response_serializer=immvis__pb2.FloatDimensionValue.SerializeToString,
-      ),
-      'GetDimensionStringValues': grpc.unary_stream_rpc_method_handler(
-          servicer.GetDimensionStringValues,
-          request_deserializer=immvis__pb2.Dimension.FromString,
-          response_serializer=immvis__pb2.StringDimensionValue.SerializeToString,
-      ),
       'GetDimensionDescriptiveStatistics': grpc.unary_stream_rpc_method_handler(
           servicer.GetDimensionDescriptiveStatistics,
           request_deserializer=immvis__pb2.Dimension.FromString,
           response_serializer=immvis__pb2.Feature.SerializeToString,
+      ),
+      'GetDimensionInfo': grpc.unary_unary_rpc_method_handler(
+          servicer.GetDimensionInfo,
+          request_deserializer=immvis__pb2.Dimension.FromString,
+          response_serializer=immvis__pb2.DimensionInfo.SerializeToString,
+      ),
+      'GetDimensionData': grpc.stream_stream_rpc_method_handler(
+          servicer.GetDimensionData,
+          request_deserializer=immvis__pb2.Dimension.FromString,
+          response_serializer=immvis__pb2.DimensionData.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

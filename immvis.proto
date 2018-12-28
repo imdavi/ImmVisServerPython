@@ -5,15 +5,11 @@ service ImmVis {
     
     rpc GetDatasetDimensions(Void) returns (stream DimensionInfo) {}
 
-    rpc GetDimensionFloatValues(Dimension) returns (stream FloatDimensionValue) {}
-
-    rpc GetDimensionFloatHead(Dimension) returns (stream FloatDimensionValue) {}
-
-    rpc GetDimensionFloatTail(Dimension) returns (stream FloatDimensionValue) {}
-    
-    rpc GetDimensionStringValues(Dimension) returns (stream StringDimensionValue) {}
-
     rpc GetDimensionDescriptiveStatistics(Dimension) returns (stream Feature) {}
+
+    rpc GetDimensionInfo(Dimension) returns (DimensionInfo) {}
+    
+    rpc GetDimensionData(stream Dimension) returns (stream DimensionData) {}
 }
 
 message Void {}
@@ -31,16 +27,14 @@ message DimensionInfo {
     string type = 2;
 }
 
+message DimensionData {
+    string name = 1;
+    string type = 2;
+    repeated string data = 3;
+}
+
 message Dimension {
     string name = 1;
-}
-
-message FloatDimensionValue {
-    float value = 1;
-}
-
-message StringDimensionValue {
-    string value = 1;
 }
 
 message Feature {
