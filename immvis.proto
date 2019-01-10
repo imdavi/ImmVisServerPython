@@ -10,6 +10,8 @@ service ImmVis {
     rpc GetDimensionInfo(Dimension) returns (DimensionInfo) {}
     
     rpc GetDimensionData(stream Dimension) returns (stream DimensionData) {}
+
+    rpc GetOutlierMapping (stream Dimension) returns (DimensionData);
 }
 
 message Void {}

@@ -39,6 +39,11 @@ class ImmVisStub(object):
         request_serializer=immvis__pb2.Dimension.SerializeToString,
         response_deserializer=immvis__pb2.DimensionData.FromString,
         )
+    self.GetOutlierMapping = channel.stream_unary(
+        '/ImmVis/GetOutlierMapping',
+        request_serializer=immvis__pb2.Dimension.SerializeToString,
+        response_deserializer=immvis__pb2.DimensionData.FromString,
+        )
 
 
 class ImmVisServicer(object):
@@ -80,6 +85,13 @@ class ImmVisServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def GetOutlierMapping(self, request_iterator, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_ImmVisServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -105,6 +117,11 @@ def add_ImmVisServicer_to_server(servicer, server):
       ),
       'GetDimensionData': grpc.stream_stream_rpc_method_handler(
           servicer.GetDimensionData,
+          request_deserializer=immvis__pb2.Dimension.FromString,
+          response_serializer=immvis__pb2.DimensionData.SerializeToString,
+      ),
+      'GetOutlierMapping': grpc.stream_unary_rpc_method_handler(
+          servicer.GetOutlierMapping,
           request_deserializer=immvis__pb2.Dimension.FromString,
           response_serializer=immvis__pb2.DimensionData.SerializeToString,
       ),

@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cimmvis.proto\"\x06\n\x04Void\"*\n\x16OpenDatasetFileRequest\x12\x10\n\x08\x66ilePath\x18\x01 \x01(\t\"/\n\x17OpenDatasetFileResponse\x12\x14\n\x0cresponseCode\x18\x01 \x01(\x05\"+\n\rDimensionInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"9\n\rDimensionData\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x03 \x03(\t\"\x19\n\tDimension\x12\x0c\n\x04name\x18\x01 \x01(\t\"4\n\x07\x46\x65\x61ture\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t2\xaa\x02\n\x06ImmVis\x12\x46\n\x0fOpenDatasetFile\x12\x17.OpenDatasetFileRequest\x1a\x18.OpenDatasetFileResponse\"\x00\x12\x31\n\x14GetDatasetDimensions\x12\x05.Void\x1a\x0e.DimensionInfo\"\x00\x30\x01\x12=\n!GetDimensionDescriptiveStatistics\x12\n.Dimension\x1a\x08.Feature\"\x00\x30\x01\x12\x30\n\x10GetDimensionInfo\x12\n.Dimension\x1a\x0e.DimensionInfo\"\x00\x12\x34\n\x10GetDimensionData\x12\n.Dimension\x1a\x0e.DimensionData\"\x00(\x01\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0cimmvis.proto\"\x06\n\x04Void\"*\n\x16OpenDatasetFileRequest\x12\x10\n\x08\x66ilePath\x18\x01 \x01(\t\"/\n\x17OpenDatasetFileResponse\x12\x14\n\x0cresponseCode\x18\x01 \x01(\x05\"+\n\rDimensionInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"9\n\rDimensionData\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x03 \x03(\t\"\x19\n\tDimension\x12\x0c\n\x04name\x18\x01 \x01(\t\"4\n\x07\x46\x65\x61ture\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t2\xdd\x02\n\x06ImmVis\x12\x46\n\x0fOpenDatasetFile\x12\x17.OpenDatasetFileRequest\x1a\x18.OpenDatasetFileResponse\"\x00\x12\x31\n\x14GetDatasetDimensions\x12\x05.Void\x1a\x0e.DimensionInfo\"\x00\x30\x01\x12=\n!GetDimensionDescriptiveStatistics\x12\n.Dimension\x1a\x08.Feature\"\x00\x30\x01\x12\x30\n\x10GetDimensionInfo\x12\n.Dimension\x1a\x0e.DimensionInfo\"\x00\x12\x34\n\x10GetDimensionData\x12\n.Dimension\x1a\x0e.DimensionData\"\x00(\x01\x30\x01\x12\x31\n\x11GetOutlierMapping\x12\n.Dimension\x1a\x0e.DimensionData(\x01\x62\x06proto3')
 )
 
 
@@ -336,7 +336,7 @@ _IMMVIS = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   serialized_start=303,
-  serialized_end=601,
+  serialized_end=652,
   methods=[
   _descriptor.MethodDescriptor(
     name='OpenDatasetFile',
@@ -378,6 +378,15 @@ _IMMVIS = _descriptor.ServiceDescriptor(
     name='GetDimensionData',
     full_name='ImmVis.GetDimensionData',
     index=4,
+    containing_service=None,
+    input_type=_DIMENSION,
+    output_type=_DIMENSIONDATA,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetOutlierMapping',
+    full_name='ImmVis.GetOutlierMapping',
+    index=5,
     containing_service=None,
     input_type=_DIMENSION,
     output_type=_DIMENSIONDATA,

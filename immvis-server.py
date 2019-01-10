@@ -5,6 +5,7 @@ import pandas as pd
 import pandas.api.types as ptypes
 import immvis_pb2
 import immvis_pb2_grpc
+import numpy as np
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
@@ -65,6 +66,50 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
             dimension_data = [str(value) for value in dimension_series.values]
 
             yield immvis_pb2.DimensionData(name=dimension_name, type=dimension_type, data=dimension_data)
+    def GetOutlierMapping(self, request_iterator, context):
+        dimensions = [dimension.name for dimension in request_iterator]
+
+        outlier_mapping = is_outlier(self.data_frame[dimensions].values)
+                    
+        dimension_name = "OutlierMapping"
+
+        dimension_type = "bool"
+
+        dimension_data = [str(value) for value in outlier_mapping]
+
+        return immvis_pb2.DimensionData(name=dimension_name, type=dimension_type, data=dimension_data)
+
+def is_outlier(points, thresh=3.5):
+    """
+    Returns a boolean array with True if points are outliers and False 
+    otherwise.
+
+    Parameters:
+    -----------
+        points : An numobservations by numdimensions array of observations
+        thresh : The modified z-score to use as a threshold. Observations with
+            a modified z-score (based on the median absolute deviation) greater
+            than this value will be classified as outliers.
+
+    Returns:
+    --------
+        mask : A numobservations-length boolean array.
+
+    References:
+    ----------
+        Boris Iglewicz and David Hoaglin (1993), "Volume 16: How to Detect and
+        Handle Outliers", The ASQC Basic References in Quality Control:
+        Statistical Techniques, Edward F. Mykytka, Ph.D., Editor. 
+    """
+    if len(points.shape) == 1:
+        points = points[:,None]
+    median = np.median(points, axis=0)
+    diff = np.sum((points - median)**2, axis=-1)
+    diff = np.sqrt(diff)
+    med_abs_deviation = np.median(diff)
+    modified_z_score = 0.6745 * diff / med_abs_deviation
+    return modified_z_score > thresh
+
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
