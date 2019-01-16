@@ -8,6 +8,14 @@ import immvis_pb2_grpc
 import numpy as np
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
+ERROR_CODE_UNKNOWN_EXTENSION = 1
+ERROR_CODE_CANNOT_OPEN_FILE = 2
+RETURN_CODE_SUCCESS = 0
+
+FILE_EXTENSION_CSV = ".csv"
+FILE_EXTENSION_JSON = ".json"
+FILE_EXTENSION_XLS = ".xls"
+FILE_EXTENSION_XLSX = ".xlsx"
 
 class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
     data_frame = None
@@ -15,17 +23,32 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
     def OpenDatasetFile(self, request, content):
         file_path = request.filePath
 
-        responseCode = 0
+        print("Trying to open the file '" +  file_path+ "'...")
+
+        responseCode = RETURN_CODE_SUCCESS
+
+        lowercase_file_path = file_path.lower()
 
         try:
-            if "csv" in file_path:
+            if lowercase_file_path.endswith(FILE_EXTENSION_CSV):
                 self.data_frame = pd.read_csv(file_path)
-            elif "json" in file_path:
+            elif lowercase_file_path.endswith(FILE_EXTENSION_JSON):
                 self.data_frame = pd.read_json(file_path)
+            elif lowercase_file_path.endswith(FILE_EXTENSION_XLS) or lowercase_file_path.endswith(FILE_EXTENSION_XLSX):
+                self.data_frame = pd.read_excel(file_path)
             else:
-                responseCode = 1
-        except:
-            responseCode = 2
+                responseCode = ERROR_CODE_UNKNOWN_EXTENSION
+        except Exception as exception:
+            print("Error during opening the file: '" +  type(exception) + "'")
+            responseCode = ERROR_CODE_CANNOT_OPEN_FILE
+
+        if responseCode is 0:
+            print("Loaded file with success")
+        else:
+            print("File was not loaded. Error code: " + responseCode)
+
+
+        self.data_frame = self.data_frame.dropna().dropna(1)
 
         return immvis_pb2.OpenDatasetFileResponse(responseCode=responseCode)
 
@@ -66,8 +89,9 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
             dimension_data = [str(value) for value in dimension_series.values]
 
             yield immvis_pb2.DimensionData(name=dimension_name, type=dimension_type, data=dimension_data)
+            
     def GetOutlierMapping(self, request_iterator, context):
-        dimensions = [dimension.name for dimension in request_iterator]
+        dimensions = [dimension.name for dimension in request_iterator if supportsOutliers(str(self.data_frame[dimension.name].dtype))]
 
         outlier_mapping = is_outlier(self.data_frame[dimensions].values)
                     
@@ -75,9 +99,17 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
 
         dimension_type = "bool"
 
-        dimension_data = [str(value) for value in outlier_mapping]
+        dimension_data = []
+
+        if len(dimensions) > 0:
+            dimension_data = [str(value) for value in outlier_mapping]
+        else:
+            dimension_data = [False for x in range(0, len(self.data_frame.index))]
 
         return immvis_pb2.DimensionData(name=dimension_name, type=dimension_type, data=dimension_data)
+
+def supportsOutliers(dimension_name):
+    return dimension_name != "object" and dimension_name != "int64"
 
 def is_outlier(points, thresh=3.5):
     """
