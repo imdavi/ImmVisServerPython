@@ -82,16 +82,23 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
         for dimension in request_iterator:
             dimension_name = dimension.name
 
-            dimension_series = self.data_frame[dimension_name]
+            dimension_data = None
 
-            dimension_type = str(dimension_series.dtype)
+            if dimension_name is "":
+                dimension_data = immvis_pb2.DimensionData(name="empty", type="empty", data=[])
+            else:
+                dimension_series = self.data_frame[dimension_name]
 
-            dimension_data = [str(value) for value in dimension_series.values]
+                dimension_type = str(dimension_series.dtype)
 
-            yield immvis_pb2.DimensionData(name=dimension_name, type=dimension_type, data=dimension_data)
+                dimension_data = [str(value) for value in dimension_series.values]
+
+                dimension_data = immvis_pb2.DimensionData(name=dimension_name, type=dimension_type, data=dimension_data)
+            
+            yield dimension_data
             
     def GetOutlierMapping(self, request_iterator, context):
-        dimensions = [dimension.name for dimension in request_iterator if supportsOutliers(str(self.data_frame[dimension.name].dtype))]
+        dimensions = [dimension.name for dimension in request_iterator if dimension.name != "" and supportsOutliers(str(self.data_frame[dimension.name].dtype))]
 
         outlier_mapping = is_outlier(self.data_frame[dimensions].values)
                     
@@ -109,7 +116,7 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
         return immvis_pb2.DimensionData(name=dimension_name, type=dimension_type, data=dimension_data)
 
 def supportsOutliers(dimension_name):
-    return dimension_name != "object" and dimension_name != "int64"
+    return dimension_name != "object" and dimension_name != "int64" and dimension_name != ""
 
 def is_outlier(points, thresh=3.5):
     """
