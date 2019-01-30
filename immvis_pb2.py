@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cimmvis.proto\"\x06\n\x04Void\"*\n\x16OpenDatasetFileRequest\x12\x10\n\x08\x66ilePath\x18\x01 \x01(\t\"/\n\x17OpenDatasetFileResponse\x12\x14\n\x0cresponseCode\x18\x01 \x01(\x05\"+\n\rDimensionInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"9\n\rDimensionData\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x03 \x03(\t\"\x19\n\tDimension\x12\x0c\n\x04name\x18\x01 \x01(\t\"4\n\x07\x46\x65\x61ture\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t2\xdd\x02\n\x06ImmVis\x12\x46\n\x0fOpenDatasetFile\x12\x17.OpenDatasetFileRequest\x1a\x18.OpenDatasetFileResponse\"\x00\x12\x31\n\x14GetDatasetDimensions\x12\x05.Void\x1a\x0e.DimensionInfo\"\x00\x30\x01\x12=\n!GetDimensionDescriptiveStatistics\x12\n.Dimension\x1a\x08.Feature\"\x00\x30\x01\x12\x30\n\x10GetDimensionInfo\x12\n.Dimension\x1a\x0e.DimensionInfo\"\x00\x12\x34\n\x10GetDimensionData\x12\n.Dimension\x1a\x0e.DimensionData\"\x00(\x01\x30\x01\x12\x31\n\x11GetOutlierMapping\x12\n.Dimension\x1a\x0e.DimensionData(\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0cimmvis.proto\"\x06\n\x04Void\"*\n\x16OpenDatasetFileRequest\x12\x10\n\x08\x66ilePath\x18\x01 \x01(\t\"/\n\x17OpenDatasetFileResponse\x12\x14\n\x0cresponseCode\x18\x01 \x01(\x05\"+\n\rDimensionInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"9\n\rDimensionData\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x03 \x03(\t\"\x19\n\tDimension\x12\x0c\n\x04name\x18\x01 \x01(\t\"D\n\rKMeansRequest\x12\x1e\n\ndimensions\x18\x01 \x03(\x0b\x32\n.Dimension\x12\x13\n\x0bnumClusters\x18\x02 \x01(\x05\"3\n\x0eKMeansCentroid\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x13\n\x0b\x63oordinates\x18\x02 \x03(\t\"4\n\x07\x46\x65\x61ture\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t2\xd7\x03\n\x06ImmVis\x12\x46\n\x0fOpenDatasetFile\x12\x17.OpenDatasetFileRequest\x1a\x18.OpenDatasetFileResponse\"\x00\x12\x31\n\x14GetDatasetDimensions\x12\x05.Void\x1a\x0e.DimensionInfo\"\x00\x30\x01\x12=\n!GetDimensionDescriptiveStatistics\x12\n.Dimension\x1a\x08.Feature\"\x00\x30\x01\x12\x30\n\x10GetDimensionInfo\x12\n.Dimension\x1a\x0e.DimensionInfo\"\x00\x12\x34\n\x10GetDimensionData\x12\n.Dimension\x1a\x0e.DimensionData\"\x00(\x01\x30\x01\x12\x33\n\x11GetOutlierMapping\x12\n.Dimension\x1a\x0e.DimensionData\"\x00(\x01\x12\x39\n\x12GetKMeansCentroids\x12\x0e.KMeansRequest\x1a\x0f.KMeansCentroid\"\x00\x30\x01\x12;\n\x17GetKMeansClusterMapping\x12\x0e.KMeansRequest\x1a\x0e.DimensionData\"\x00\x62\x06proto3')
 )
 
 
@@ -225,6 +225,82 @@ _DIMENSION = _descriptor.Descriptor(
 )
 
 
+_KMEANSREQUEST = _descriptor.Descriptor(
+  name='KMeansRequest',
+  full_name='KMeansRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='dimensions', full_name='KMeansRequest.dimensions', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='numClusters', full_name='KMeansRequest.numClusters', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=248,
+  serialized_end=316,
+)
+
+
+_KMEANSCENTROID = _descriptor.Descriptor(
+  name='KMeansCentroid',
+  full_name='KMeansCentroid',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='KMeansCentroid.type', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='coordinates', full_name='KMeansCentroid.coordinates', index=1,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=318,
+  serialized_end=369,
+)
+
+
 _FEATURE = _descriptor.Descriptor(
   name='Feature',
   full_name='Feature',
@@ -265,16 +341,19 @@ _FEATURE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=248,
-  serialized_end=300,
+  serialized_start=371,
+  serialized_end=423,
 )
 
+_KMEANSREQUEST.fields_by_name['dimensions'].message_type = _DIMENSION
 DESCRIPTOR.message_types_by_name['Void'] = _VOID
 DESCRIPTOR.message_types_by_name['OpenDatasetFileRequest'] = _OPENDATASETFILEREQUEST
 DESCRIPTOR.message_types_by_name['OpenDatasetFileResponse'] = _OPENDATASETFILERESPONSE
 DESCRIPTOR.message_types_by_name['DimensionInfo'] = _DIMENSIONINFO
 DESCRIPTOR.message_types_by_name['DimensionData'] = _DIMENSIONDATA
 DESCRIPTOR.message_types_by_name['Dimension'] = _DIMENSION
+DESCRIPTOR.message_types_by_name['KMeansRequest'] = _KMEANSREQUEST
+DESCRIPTOR.message_types_by_name['KMeansCentroid'] = _KMEANSCENTROID
 DESCRIPTOR.message_types_by_name['Feature'] = _FEATURE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -320,6 +399,20 @@ Dimension = _reflection.GeneratedProtocolMessageType('Dimension', (_message.Mess
   ))
 _sym_db.RegisterMessage(Dimension)
 
+KMeansRequest = _reflection.GeneratedProtocolMessageType('KMeansRequest', (_message.Message,), dict(
+  DESCRIPTOR = _KMEANSREQUEST,
+  __module__ = 'immvis_pb2'
+  # @@protoc_insertion_point(class_scope:KMeansRequest)
+  ))
+_sym_db.RegisterMessage(KMeansRequest)
+
+KMeansCentroid = _reflection.GeneratedProtocolMessageType('KMeansCentroid', (_message.Message,), dict(
+  DESCRIPTOR = _KMEANSCENTROID,
+  __module__ = 'immvis_pb2'
+  # @@protoc_insertion_point(class_scope:KMeansCentroid)
+  ))
+_sym_db.RegisterMessage(KMeansCentroid)
+
 Feature = _reflection.GeneratedProtocolMessageType('Feature', (_message.Message,), dict(
   DESCRIPTOR = _FEATURE,
   __module__ = 'immvis_pb2'
@@ -335,8 +428,8 @@ _IMMVIS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=303,
-  serialized_end=652,
+  serialized_start=426,
+  serialized_end=897,
   methods=[
   _descriptor.MethodDescriptor(
     name='OpenDatasetFile',
@@ -389,6 +482,24 @@ _IMMVIS = _descriptor.ServiceDescriptor(
     index=5,
     containing_service=None,
     input_type=_DIMENSION,
+    output_type=_DIMENSIONDATA,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetKMeansCentroids',
+    full_name='ImmVis.GetKMeansCentroids',
+    index=6,
+    containing_service=None,
+    input_type=_KMEANSREQUEST,
+    output_type=_KMEANSCENTROID,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetKMeansClusterMapping',
+    full_name='ImmVis.GetKMeansClusterMapping',
+    index=7,
+    containing_service=None,
+    input_type=_KMEANSREQUEST,
     output_type=_DIMENSIONDATA,
     serialized_options=None,
   ),

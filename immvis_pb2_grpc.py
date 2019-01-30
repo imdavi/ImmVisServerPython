@@ -44,6 +44,16 @@ class ImmVisStub(object):
         request_serializer=immvis__pb2.Dimension.SerializeToString,
         response_deserializer=immvis__pb2.DimensionData.FromString,
         )
+    self.GetKMeansCentroids = channel.unary_stream(
+        '/ImmVis/GetKMeansCentroids',
+        request_serializer=immvis__pb2.KMeansRequest.SerializeToString,
+        response_deserializer=immvis__pb2.KMeansCentroid.FromString,
+        )
+    self.GetKMeansClusterMapping = channel.unary_unary(
+        '/ImmVis/GetKMeansClusterMapping',
+        request_serializer=immvis__pb2.KMeansRequest.SerializeToString,
+        response_deserializer=immvis__pb2.DimensionData.FromString,
+        )
 
 
 class ImmVisServicer(object):
@@ -92,6 +102,20 @@ class ImmVisServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def GetKMeansCentroids(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetKMeansClusterMapping(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_ImmVisServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -123,6 +147,16 @@ def add_ImmVisServicer_to_server(servicer, server):
       'GetOutlierMapping': grpc.stream_unary_rpc_method_handler(
           servicer.GetOutlierMapping,
           request_deserializer=immvis__pb2.Dimension.FromString,
+          response_serializer=immvis__pb2.DimensionData.SerializeToString,
+      ),
+      'GetKMeansCentroids': grpc.unary_stream_rpc_method_handler(
+          servicer.GetKMeansCentroids,
+          request_deserializer=immvis__pb2.KMeansRequest.FromString,
+          response_serializer=immvis__pb2.KMeansCentroid.SerializeToString,
+      ),
+      'GetKMeansClusterMapping': grpc.unary_unary_rpc_method_handler(
+          servicer.GetKMeansClusterMapping,
+          request_deserializer=immvis__pb2.KMeansRequest.FromString,
           response_serializer=immvis__pb2.DimensionData.SerializeToString,
       ),
   }

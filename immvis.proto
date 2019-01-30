@@ -11,7 +11,11 @@ service ImmVis {
     
     rpc GetDimensionData(stream Dimension) returns (stream DimensionData) {}
 
-    rpc GetOutlierMapping (stream Dimension) returns (DimensionData);
+    rpc GetOutlierMapping (stream Dimension) returns (DimensionData) {}
+
+    rpc GetKMeansCentroids (KMeansRequest) returns (stream KMeansCentroid) {}
+
+    rpc GetKMeansClusterMapping(KMeansRequest) returns (DimensionData) {}
 }
 
 message Void {}
@@ -37,6 +41,16 @@ message DimensionData {
 
 message Dimension {
     string name = 1;
+}
+
+message KMeansRequest {
+    repeated Dimension dimensions = 1;
+    int32 numClusters = 2;
+}
+
+message KMeansCentroid {
+    string type = 1;
+    repeated string coordinates = 2;
 }
 
 message Feature {

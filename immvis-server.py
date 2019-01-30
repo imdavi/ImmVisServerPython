@@ -6,6 +6,7 @@ import pandas.api.types as ptypes
 import immvis_pb2
 import immvis_pb2_grpc
 import numpy as np
+from sklearn.cluster import KMeans
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 ERROR_CODE_UNKNOWN_EXTENSION = 1
@@ -114,6 +115,44 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
             dimension_data = [False for x in range(0, len(self.data_frame.index))]
 
         return immvis_pb2.DimensionData(name=dimension_name, type=dimension_type, data=dimension_data)
+
+    def GetKMeansCentroids(self, request, context):
+        numClusters = request.numClusters
+        
+        dimensions = [dimension.name for dimension in request.dimensions]
+
+        kmeans = create_k_means(numClusters)
+
+        kmeans.fit(self.data_frame[dimensions])
+
+        for cluster_center in kmeans.cluster_centers_:
+            coordinates = [str(value) for value in cluster_center]
+            yield immvis_pb2.KMeansCentroid(type='float64', coordinates=coordinates)
+
+    def GetKMeansClusterMapping(self, request, context):
+        numClusters = request.numClusters
+        
+        dimensions = [dimension.name for dimension in request.dimensions]
+
+        kmeans = create_k_means(numClusters)
+
+        kmeans.fit_transform(self.data_frame[dimensions])
+
+        dimension_name = "KMeansClusteringMapping"
+
+        dimension_type = "int64"
+
+        dimension_data = []
+
+        if len(dimensions) > 0:
+            dimension_data = [str(value) for value in kmeans.labels_]
+        else:
+            dimension_data = [0 for x in range(0, len(self.data_frame.index))]
+
+        return immvis_pb2.DimensionData(name=dimension_name, type=dimension_type, data=dimension_data)
+
+def create_k_means(numClusters):
+    return KMeans(n_clusters = numClusters, init='random')
 
 def supportsOutliers(dimension_name):
     return dimension_name != "object" and dimension_name != "int64" and dimension_name != ""
