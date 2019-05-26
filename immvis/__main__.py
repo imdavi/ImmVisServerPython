@@ -152,12 +152,21 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
     def GetDatasetValues(self, request, context):
         if self.data_frame is None:
             raise Exception("Failed to get dimensions.")
+<<<<<<< HEAD
 
         for index, row in enumerate(self.data_frame.values):
             row_values_list = row.tolist()
 
             row_values_str_list = map(lambda value: str(value), row_values_list)
 
+=======
+            
+        for index, row in enumerate(self.data_frame.values):
+            row_values_list = row.tolist()
+            
+            row_values_str_list = map(lambda value: str(value), row_values_list)
+            
+>>>>>>> 55da3784ee8b7d45f9c1ace544547dcd3c95ba0c
             yield immvis_pb2.DataRow(index, row_values_str_list)
 
 def create_k_means(numClusters):
