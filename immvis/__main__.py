@@ -19,7 +19,7 @@ RETURN_CODE_SUCCESS = 0
 class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
     data_frame = None
 
-    def OpenDatasetFile(self, request, content):
+    def OpenDatasetFile(self, request, context):
         file_path = request.filePath
 
         print("Trying to open the file '" +  file_path + "'...")
@@ -51,7 +51,7 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
 
         return immvis_pb2.OpenDatasetFileResponse(responseCode=responseCode)
 
-    def GetDatasetDimensions(self, request, content):
+    def GetDatasetDimensions(self, request, context):
         if self.data_frame is None:
             raise Exception("Failed to get dimensions.")
 
@@ -60,14 +60,14 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
         for column in self.data_frame:
             yield immvis_pb2.DimensionInfo(name=column, type=str(types[column]))
 
-    def GetDimensionInfo(self, request, content):
+    def GetDimensionInfo(self, request, context):
         dimension_name = request.name
 
         dimension_series = self.data_frame[dimension_name]
 
         return str(dimension_series.dtype)
     
-    def GetDimensionDescriptiveStatistics(self, request, content):
+    def GetDimensionDescriptiveStatistics(self, request, context):
         dimension_name = request.name
 
         desc_stats = self.data_frame[dimension_name].describe()
@@ -148,6 +148,17 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
             dimension_data = [0 for x in range(0, len(self.data_frame.index))]
 
         return immvis_pb2.DimensionData(name=dimension_name, type=dimension_type, data=dimension_data)
+
+    def GetDatasetValues(self, request, context):
+        if self.data_frame is None:
+            raise Exception("Failed to get dimensions.")
+            
+        for index, row in enumerate(self.data_frame.values):
+            row_values_list = row.tolist()
+            
+            row_values_str_list = map(lambda value: str(value), row_values_list)
+            
+            yield immvis_pb2.DataRow(index, row_values_str_list)
 
 def create_k_means(numClusters):
     return KMeans(n_clusters = numClusters, init='random')

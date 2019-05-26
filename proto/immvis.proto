@@ -16,6 +16,8 @@ service ImmVis {
     rpc GetKMeansCentroids (KMeansRequest) returns (stream KMeansCentroid) {}
 
     rpc GetKMeansClusterMapping(KMeansRequest) returns (DimensionData) {}
+
+    rpc GetDatasetValues (Void) returns (stream DataRow);
 }
 
 message Void {}
@@ -37,6 +39,11 @@ message DimensionData {
     string name = 1;
     string type = 2;
     repeated string data = 3;
+}
+
+message DataRow {
+    int32 index = 1;
+    repeated string values = 2;
 }
 
 message Dimension {
