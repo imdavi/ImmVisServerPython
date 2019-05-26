@@ -5,3 +5,5 @@ grpcio-tools
 numpy
 xlrd
 sklearn
+filetype
+Pillow

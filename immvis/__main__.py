@@ -7,16 +7,14 @@ import immvis_pb2
 import immvis_pb2_grpc
 import numpy as np
 from sklearn.cluster import KMeans
+import filetype
+from _extutils import is_csv, is_excel, is_image, is_json
+from _imgdataset import read_image_as_dataframe
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 ERROR_CODE_UNKNOWN_EXTENSION = 1
 ERROR_CODE_CANNOT_OPEN_FILE = 2
 RETURN_CODE_SUCCESS = 0
-
-FILE_EXTENSION_CSV = ".csv"
-FILE_EXTENSION_JSON = ".json"
-FILE_EXTENSION_XLS = ".xls"
-FILE_EXTENSION_XLSX = ".xlsx"
 
 class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
     data_frame = None
@@ -24,19 +22,19 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
     def OpenDatasetFile(self, request, content):
         file_path = request.filePath
 
-        print("Trying to open the file '" +  file_path+ "'...")
+        print("Trying to open the file '" +  file_path + "'...")
 
         responseCode = RETURN_CODE_SUCCESS
 
-        lowercase_file_path = file_path.lower()
-
         try:
-            if lowercase_file_path.endswith(FILE_EXTENSION_CSV):
+            if is_csv(file_path): 
                 self.data_frame = pd.read_csv(file_path)
-            elif lowercase_file_path.endswith(FILE_EXTENSION_JSON):
+            elif is_json(file_path):
                 self.data_frame = pd.read_json(file_path)
-            elif lowercase_file_path.endswith(FILE_EXTENSION_XLS) or lowercase_file_path.endswith(FILE_EXTENSION_XLSX):
+            elif is_excel(file_path):
                 self.data_frame = pd.read_excel(file_path)
+            elif is_image(file_path):
+                self.data_frame = read_image_as_dataframe(file_path)
             else:
                 responseCode = ERROR_CODE_UNKNOWN_EXTENSION
         except Exception as exception:

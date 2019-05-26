@@ -14,6 +14,8 @@ setup(name='immvis-server',
           'grpcio-tools',
           'numpy',
           'xlrd',
-          'sklearn'
+          'sklearn',
+          'filetype',
+          'Pillow'
       ],
       zip_safe=False)
