@@ -25,7 +25,3 @@ def is_image(file_path):
     _has_extension(file_path, _FILE_EXTENSION_JPEG) or 
     _has_extension(file_path, _FILE_EXTENSION_PNG) or 
     _has_extension(file_path, _FILE_EXTENSION_TIF))
-
-
-
-

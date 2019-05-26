@@ -20,7 +20,7 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
     data_frame = None
 
     def OpenDatasetFile(self, request, context):
-        file_path = request.filePath
+        file_path = request.filePath.strip()
 
         print("Trying to open the file '" +  file_path + "'...")
 
@@ -43,11 +43,9 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
 
         if responseCode is 0:
             print("Loaded file with success")
+            self.data_frame = self.data_frame.dropna().dropna(1)
         else:
-            print("File was not loaded. Error code: " + responseCode)
-
-
-        self.data_frame = self.data_frame.dropna().dropna(1)
+            print("File was not loaded. Error code: " + str(responseCode))
 
         return immvis_pb2.OpenDatasetFileResponse(responseCode=responseCode)
 
@@ -158,7 +156,7 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
 
             row_values_str_list = map(lambda value: str(value), row_values_list)
 
-            yield immvis_pb2.DataRow(index, row_values_str_list)
+            yield immvis_pb2.DataRow(index=index, values=row_values_str_list)
 
 def create_k_means(numClusters):
     return KMeans(n_clusters = numClusters, init='random')
