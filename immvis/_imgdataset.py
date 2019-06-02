@@ -18,7 +18,7 @@ _L_COLUMN = 'l'
 _H_COLUMN = 'h'
 _S_COLUMN = 's'
 _V_COLUMN = 'v'
-_PIXEL_COLUMN = 'pixel_value'
+_PIXEL_COLUMN = 'value'
 
 _BASE_COLUMNS = [_Y_COLUMN, _X_COLUMN]
 
