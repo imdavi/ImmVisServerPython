@@ -14,6 +14,8 @@ if [ -f $PROTO_FILE ]; then
     echo Generating Python files...
 
     python -m grpc_tools.protoc -I $PROTO_DIR  --python_out=$IMMVIS_DIR --grpc_python_out=$IMMVIS_DIR $PROTO_FILE
+    
+    echo Done! The generated filed are available on $IMMVIS_DIR.
 else
    echo "The file '$PROTO_FILE' was not found."
 fi
