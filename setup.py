@@ -19,3 +19,4 @@ setup(name='immvis-server',
           'Pillow'
       ],
       zip_safe=False)
+      

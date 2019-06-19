@@ -19,6 +19,14 @@ RETURN_CODE_SUCCESS = 0
 class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
     data_frame = None
 
+    def _assertDimensionExists(self, dimension_name):
+        if not dimension_name in self.data_frame:
+            raise Exception("The dimension \'" + dimension_name + "doesn't exist at the dataset." )
+
+    def _assertLoadedDataset(self):
+        if self.data_frame is None:
+            raise Exception("Failed to get dimensions.")
+
     def OpenDatasetFile(self, request, context):
         file_path = request.filePath.strip()
 
@@ -148,10 +156,34 @@ class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
         return immvis_pb2.DimensionData(name=dimension_name, type=dimension_type, data=dimension_data)
 
     def GetDatasetValues(self, request, context):
-        if self.data_frame is None:
-            raise Exception("Failed to get dimensions.")
-
+        self._assertLoadedDataset()
+        
         for index, row in enumerate(self.data_frame.values):
+            row_values_list = row.tolist()
+
+            row_values_str_list = map(lambda value: str(value), row_values_list)
+
+            yield immvis_pb2.DataRow(index=index, values=row_values_str_list)
+
+    def GetCorrelationBetweenTwoDimensions(self, request, context):
+        self._assertLoadedDataset()
+        
+        dimension1 = request.dimension1
+        self._assertDimensionExists(dimension1)
+
+        dimension2 = request.dimension2
+        self._assertDimensionExists(dimension2)
+
+        correlation = self.data_frame[dimension1].corr(self.data_frame[dimension2])
+
+        return immvis_pb2.FloatResult(result=correlation)
+
+    def GetCorrelationMatrix(self, request, context):
+        self._assertLoadedDataset()
+
+        correlation_matrix = self.data_frame.corr()
+
+        for index, row in enumerate(correlation_matrix.values):
             row_values_list = row.tolist()
 
             row_values_str_list = map(lambda value: str(value), row_values_list)
