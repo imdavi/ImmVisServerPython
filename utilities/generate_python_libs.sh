@@ -8,12 +8,17 @@ PROTO_DIR=$ROOT_DIR/proto
 
 PROTO_FILE=$PROTO_DIR/immvis.proto
 
-IMMVIS_DIR=$ROOT_DIR/immvis
+IMMVIS_DIR=$ROOT_DIR/immvis/server/generated
 
 if [ -f $PROTO_FILE ]; then
     echo Generating Python files...
 
-    python -m grpc_tools.protoc -I $PROTO_DIR  --python_out=$IMMVIS_DIR --grpc_python_out=$IMMVIS_DIR $PROTO_FILE
+    if [ ! -e $IMMVIS_DIR ]; then
+        mkdir $IMMVIS_DIR
+        touch $IMMVIS_DIR/__init__.py
+    fi
+
+    python3 -m grpc_tools.protoc -I$PROTO_DIR  --python_out=$IMMVIS_DIR --grpc_python_out=$IMMVIS_DIR $PROTO_FILE
     
     echo Done! The generated filed are available on $IMMVIS_DIR.
 else

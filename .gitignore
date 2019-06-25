@@ -1,6 +1,7 @@
 # Ignoring cs files to avoid confusion with clients
 *.cs
 csharp/
+generated/
 
 # Ignoring python generated files
 immvis_pb2*
