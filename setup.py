@@ -16,8 +16,7 @@ setup(name='immvis-server',
           'xlrd',
           'sklearn',
           'filetype',
-          'Pillow',
-          'asyncio'
+          'Pillow'
       ],
       zip_safe=False)
       

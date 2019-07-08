@@ -1,6 +1,3 @@
-setuptools
-wheel
-pylint
 pandas
 protobuf
 grpcio
@@ -10,4 +7,3 @@ xlrd
 sklearn
 filetype
 Pillow
-asyncio
