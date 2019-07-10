@@ -15,7 +15,7 @@ ERROR_CODE_UNKNOWN_EXTENSION = 1
 ERROR_CODE_CANNOT_OPEN_FILE = 2
 RETURN_CODE_SUCCESS = 0
 
-class ImmVisServer(immvis_pb2_grpc.ImmVisServicer):
+class ImmVisGrpcServer(immvis_pb2_grpc.ImmVisServicer):
     data_frame = None
 
     def __init__(self, data_frame = None):

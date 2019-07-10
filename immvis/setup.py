@@ -1,7 +1,7 @@
 from setuptools import setup
 
-setup(name='immvis-server',
-      version='0.1',
+setup(name='immvis',
+      version='0.2',
       description='The server component from ImmVis',
       author='Felipe Pedroso',
       author_email='f.pedroso677@gmail.com',

@@ -7,3 +7,5 @@ xlrd
 sklearn
 filetype
 Pillow
+matplotlib
+seaborn

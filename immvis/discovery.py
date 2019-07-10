@@ -32,14 +32,13 @@ class ImmVisDiscoveryService():
             data = Template("$magic:$ip").substitute(
                 magic=_MAGIC, ip=current_ip)
             broadcast_socket.sendto(str.encode(data), ('<broadcast>', self._port))
-            print("Sending service announcement with ip:" + current_ip)
             time.sleep(self._delay)
 
         return
 
     def stop(self):
         self._SHOULD_BROADCAST = False
-        self._executor.shutdown()
+        self._executor.shutdown(wait=False)
 
 if __name__ == '__main__':
     print("Running service discovery...")
