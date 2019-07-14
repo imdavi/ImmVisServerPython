@@ -22,7 +22,7 @@ class ImmVisGrpcServer(immvis_pb2_grpc.ImmVisServicer):
         self.data_frame = data_frame
 
     def _assertDimensionExists(self, dimension_name):
-        if not dimension_name in self.data_frame:
+        if not str(dimension_name) in self.data_frame:
             raise Exception("The dimension \'" + dimension_name +
                             "doesn't exist at the dataset.")
 
@@ -177,10 +177,10 @@ class ImmVisGrpcServer(immvis_pb2_grpc.ImmVisServicer):
     def GetCorrelationBetweenTwoDimensions(self, request, context):
         self._assertLoadedDataset()
 
-        dimension1 = request.dimension1
+        dimension1 = request.dimension1.name
         self._assertDimensionExists(dimension1)
 
-        dimension2 = request.dimension2
+        dimension2 = request.dimension2.name
         self._assertDimensionExists(dimension2)
 
         correlation = self.data_frame[dimension1].corr(
