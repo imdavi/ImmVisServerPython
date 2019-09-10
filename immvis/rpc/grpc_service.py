@@ -3,13 +3,13 @@ import time
 import grpc
 import pandas as pd
 import pandas.api.types as ptypes
-import immvis_pb2
-import immvis_pb2_grpc
 import numpy as np
 from sklearn.cluster import KMeans
 import filetype
-from _extutils import is_csv, is_excel, is_image, is_json
-from _imgdataset import read_image_as_dataframe
+from data.utils.imgdataset import read_image_as_dataframe
+from proto import immvis_pb2
+from rpc import immvis_pb2_grpc
+from data.utils.extutils import is_csv, is_excel, is_image, is_json
 
 ERROR_CODE_UNKNOWN_EXTENSION = 1
 ERROR_CODE_CANNOT_OPEN_FILE = 2

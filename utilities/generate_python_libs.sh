@@ -8,10 +8,14 @@ PROTO_DIR=$ROOT_DIR/proto
 
 PROTO_FILE=$PROTO_DIR/immvis.proto
 
-IMMVIS_DIR=$ROOT_DIR/immvis
+IMMVIS_DIR=$ROOT_DIR/immvis/proto
 
 if [ -f $PROTO_FILE ]; then
     echo Generating Python files...
+
+    if [ ! -e $IMMVIS_DIR ]; then
+        mkdir $IMMVIS_DIR
+    fi
 
     python -m grpc_tools.protoc -I $PROTO_DIR  --python_out=$IMMVIS_DIR --grpc_python_out=$IMMVIS_DIR $PROTO_FILE
     
