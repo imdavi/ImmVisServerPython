@@ -1,33 +1,17 @@
-from concurrent import futures
-import time
-import grpc
-import pandas as pd
-import pandas.api.types as ptypes
-from sklearn.cluster import KMeans
-import filetype
-from data.utils.imgdataset import read_image_as_dataframe
-from proto import immvis_pb2
-from rpc import immvis_pb2_grpc
-from data.utils.extutils import is_csv, is_excel, is_image, is_json
+
+from proto import immvis_pb2, immvis_pb2_grpc
+from data.data_manager import DataManager
+from data.utils.dataset import UnknownDatasetType
 
 ERROR_CODE_UNKNOWN_EXTENSION = 1
 ERROR_CODE_CANNOT_OPEN_FILE = 2
 RETURN_CODE_SUCCESS = 0
 
 class ImmVisGrpcServer(immvis_pb2_grpc.ImmVisServicer):
-    data_frame = None
+    data_manager = None
 
-    def __init__(self, data_frame = None):
-        self.data_frame = data_frame
-
-    def _assertDimensionExists(self, dimension_name):
-        if not str(dimension_name) in self.data_frame:
-            raise Exception("The dimension \'" + dimension_name +
-                            "doesn't exist at the dataset.")
-
-    def _assertLoadedDataset(self):
-        if self.data_frame is None:
-            raise Exception("Failed to get dimensions.")
+    def __init__(self, data_manager = None):
+        self.data_manager = data_manager or DataManager()
 
     def OpenDatasetFile(self, request, context):
         file_path = request.filePath.strip()
@@ -37,52 +21,43 @@ class ImmVisGrpcServer(immvis_pb2_grpc.ImmVisServicer):
         responseCode = RETURN_CODE_SUCCESS
 
         try:
-            if is_csv(file_path):
-                self.data_frame = pd.read_csv(file_path)
-            elif is_json(file_path):
-                self.data_frame = pd.read_json(file_path)
-            elif is_excel(file_path):
-                self.data_frame = pd.read_excel(file_path)
-            elif is_image(file_path):
-                self.data_frame = read_image_as_dataframe(file_path)
-            else:
-                responseCode = ERROR_CODE_UNKNOWN_EXTENSION
+            self.data_manager.load_dataset(file_path)
+        except UnknownDatasetType as exception:
+            print("Error during opening the file: '" + type(exception) + "'")
+            responseCode = ERROR_CODE_UNKNOWN_EXTENSION
         except Exception as exception:
             print("Error during opening the file: '" + type(exception) + "'")
             responseCode = ERROR_CODE_CANNOT_OPEN_FILE
 
         if responseCode is 0:
             print("Loaded file with success")
-            self.data_frame = self.data_frame.dropna().dropna(1)
+            self.data_manager.remove_rows_with_missing_values()
+            self.data_manager.remove_columns_with_missing_values()
         else:
             print("File was not loaded. Error code: " + str(responseCode))
 
         return immvis_pb2.OpenDatasetFileResponse(responseCode=responseCode)
 
     def GetDatasetDimensions(self, request, context):
-        if self.data_frame is None:
-            raise Exception("Failed to get dimensions.")
+        dimensions = self.data_manager.get_dataset_dimensions()
 
-        types = self.data_frame.dtypes
-
-        for column in self.data_frame:
-            yield immvis_pb2.DimensionInfo(name=column, type=str(types[column]))
+        for dimension in dimensions:
+            yield immvis_pb2.DimensionInfo(name=dimension[0], type=dimension[1])
 
     def GetDimensionInfo(self, request, context):
         dimension_name = request.name
 
-        dimension_series = self.data_frame[dimension_name]
-
-        return str(dimension_series.dtype)
+        return self.data_manager.get_dimension_type(dimension_name)
 
     def GetDimensionDescriptiveStatistics(self, request, context):
         dimension_name = request.name
 
-        desc_stats = self.data_frame[dimension_name].describe()
+        desc_stats = self.data_manager.get_dimension_descriptive_statistics(dimension_name)
 
-        for feature_name in desc_stats.keys():
-            feature_value = str(desc_stats[feature_name])
-            feature_type = str(type(desc_stats[feature_name]))
+        for feature in desc_stats:
+            feature_name = feature[0]
+            feature_value = feature[1]
+            feature_type = feature[2]
             yield immvis_pb2.Feature(name=feature_name, value=feature_value, type=feature_type)
 
     def GetDimensionData(self, request_iterator, context):
@@ -95,12 +70,12 @@ class ImmVisGrpcServer(immvis_pb2_grpc.ImmVisServicer):
                 dimension_data = immvis_pb2.DimensionData(
                     name="empty", type="empty", data=[])
             else:
-                dimension_series = self.data_frame[dimension_name]
+                dimension_values = self.data_manager.get_dimension_values(dimension_name)
 
-                dimension_type = str(dimension_series.dtype)
+                dimension_type = self.data_manager.get_dimension_type(dimension_name)
 
                 dimension_data = [str(value)
-                                  for value in dimension_series.values]
+                                  for value in dimension_values]
 
                 dimension_data = immvis_pb2.DimensionData(
                     name=dimension_name, type=dimension_type, data=dimension_data)
@@ -108,22 +83,15 @@ class ImmVisGrpcServer(immvis_pb2_grpc.ImmVisServicer):
             yield dimension_data
 
     def GetOutlierMapping(self, request_iterator, context):
-        dimensions = [dimension.name for dimension in request_iterator if dimension.name !=
-                      "" and supportsOutliers(str(self.data_frame[dimension.name].dtype))]
+        dimensions = [dimension.name for dimension in request_iterator]
 
-        outlier_mapping = is_outlier(self.data_frame[dimensions].values)
+        outlier_mapping = self.data_manager.get_outlier_mapping(dimensions)
 
         dimension_name = "OutlierMapping"
 
         dimension_type = "bool"
 
-        dimension_data = []
-
-        if len(dimensions) > 0:
-            dimension_data = [str(value) for value in outlier_mapping]
-        else:
-            dimension_data = [False for x in range(
-                0, len(self.data_frame.index))]
+        dimension_data = [str(value) for value in outlier_mapping]
 
         return immvis_pb2.DimensionData(name=dimension_name, type=dimension_type, data=dimension_data)
 
@@ -132,12 +100,10 @@ class ImmVisGrpcServer(immvis_pb2_grpc.ImmVisServicer):
 
         dimensions = [dimension.name for dimension in request.dimensions]
 
-        kmeans = create_k_means(numClusters)
+        centroids = self.data_manager.get_kmeans_centroids(numClusters, dimensions)
 
-        kmeans.fit(self.data_frame[dimensions])
-
-        for cluster_center in kmeans.cluster_centers_:
-            coordinates = [str(value) for value in cluster_center]
+        for centroid in centroids:
+            coordinates = [str(value) for value in centroid]
             yield immvis_pb2.KMeansCentroid(type='float64', coordinates=coordinates)
 
     def GetKMeansClusterMapping(self, request, context):
@@ -145,64 +111,41 @@ class ImmVisGrpcServer(immvis_pb2_grpc.ImmVisServicer):
 
         dimensions = [dimension.name for dimension in request.dimensions]
 
-        kmeans = create_k_means(numClusters)
-
-        kmeans.fit_transform(self.data_frame[dimensions])
+        clustering_mapping = self.data_manager.get_kmeans_centroids(numClusters, dimensions)
 
         dimension_name = "KMeansClusteringMapping"
 
         dimension_type = "int64"
 
-        dimension_data = []
-
-        if len(dimensions) > 0:
-            dimension_data = [str(value) for value in kmeans.labels_]
-        else:
-            dimension_data = [0 for x in range(0, len(self.data_frame.index))]
+        dimension_data = map(lambda value: str(value), clustering_mapping)
 
         return immvis_pb2.DimensionData(name=dimension_name, type=dimension_type, data=dimension_data)
 
-    def GetDatasetValues(self, request, context):
-        self._assertLoadedDataset()
+    def GetDatasetValues(self, request_iterator, context):
+        dimensions = [dimension.name for dimension in request_iterator]
 
-        for index, row in enumerate(self.data_frame.values):
-            row_values_list = row.tolist()
+        rows = self.data_manager.get_dataset_rows(dimensions)
 
+        for index, row in rows:
             row_values_str_list = map(
-                lambda value: str(value), row_values_list)
+                lambda value: str(value), row)
 
             yield immvis_pb2.DataRow(index=index, values=row_values_str_list)
 
     def GetCorrelationBetweenTwoDimensions(self, request, context):
-        self._assertLoadedDataset()
-
         dimension1 = request.dimension1.name
-        self._assertDimensionExists(dimension1)
 
         dimension2 = request.dimension2.name
-        self._assertDimensionExists(dimension2)
 
-        correlation = self.data_frame[dimension1].corr(
-            self.data_frame[dimension2])
+        correlation = self.data_manager.get_correlation_between_two_dimensions(dimension1,dimension2)
 
         return immvis_pb2.FloatResult(result=correlation)
 
     def GetCorrelationMatrix(self, request, context):
-        self._assertLoadedDataset()
+        correlation_matrix = self.data_manager.get_correlation_matrix()
 
-        correlation_matrix = self.data_frame.corr()
-
-        for index, row in enumerate(correlation_matrix.values):
-            row_values_list = row.tolist()
-
+        for index, row in correlation_matrix:
             row_values_str_list = map(
-                lambda value: str(value), row_values_list)
+                lambda value: str(value), row)
 
             yield immvis_pb2.DataRow(index=index, values=row_values_str_list)
-
-
-def create_k_means(numClusters):
-    return KMeans(n_clusters=numClusters, init='random')
-
-
-

@@ -1,9 +1,7 @@
 from data.utils.extutils import is_csv, is_excel, is_json, is_image
 from data.utils.imgdataset import read_image_as_dataframe
 import pandas as pd
-
-class UnknownDatasetType(Exception):
-    pass
+from data.utils.exceptions import UnknownDatasetType
 
 def open_dataset_file(file_path):
     file_path = file_path.strip()
@@ -22,3 +20,8 @@ def open_dataset_file(file_path):
         raise UnknownDatasetType
 
     return data_frame
+
+def get_data_frame_rows_as_list(data_frame):
+    for _, row in enumerate(data_frame.values):
+        row_values_list = row.tolist()
+        yield row_values_list

@@ -1,16 +1,7 @@
-from data.utils.dataset import open_dataset_file
+from data.utils.dataset import open_dataset_file, get_data_frame_rows_as_list
 from data.utils.outliers import map_outliers, supports_outliers_check
-
-
-class DimensionNotAvailable(Exception):
-    pass
-
-class DatasetNotAvailable(Exception):
-    pass
-
-class NoDimensionsAvailableToMapOutliers(Exception):
-    pass
-
+from data.utils.kmeans import get_kmeans_centroids, get_kmeans_clustering_mapping
+from data.utils.exceptions import DatasetNotAvailable, DimensionNotAvailable, NoDimensionsAvailableToMapOutliers
 
 class DataManager():
     data_frame = None
@@ -35,6 +26,12 @@ class DataManager():
             del self.data_frame
 
         self.data_frame = open_dataset_file(file_path)
+
+    def remove_rows_with_missing_values(self):
+        self.data_frame = self.data_frame.dropna()
+
+    def remove_columns_with_missing_values(self):
+        self.data_frame = self.data_frame.dropna(1)
 
     def get_dataset_dimensions(self):
         self._assert_dataset_was_loaded()
@@ -74,10 +71,7 @@ class DataManager():
         for dimension_name in selected_dimensions:
             self._assert_dimension_exists(dimension_name)
 
-        for _, row in enumerate(self.data_frame.values):
-            row_values_list = row.tolist()
-
-            yield row_values_list
+        return get_data_frame_rows_as_list(self.data_frame[selected_dimensions])
 
     def get_correlation_between_two_dimensions(self, dimension1, dimension2):
         self._assert_dimension_exists(dimension1)
@@ -87,6 +81,13 @@ class DataManager():
         series_dimension2 = self.data_frame[dimension2]
 
         return series_dimension1.corr(series_dimension2)
+
+    def get_correlation_matrix(self):
+        self._assert_dataset_was_loaded()
+
+        correlation_matrix = self.data_frame.corr()
+
+        return get_data_frame_rows_as_list(correlation_matrix)
 
     def get_outlier_mapping(self, dimensions_to_check=None):
         self._assert_dataset_was_loaded()
@@ -112,3 +113,24 @@ class DataManager():
         for is_outlier in outlier_mapping:
             yield is_outlier
 
+    def get_kmeans_centroids(self, n_clusters, selected_dimensions):
+        self._assert_dataset_was_loaded()
+
+        if selected_dimensions is None or len(selected_dimensions) == 0:
+            selected_dimensions = self.data_frame.columns
+
+        for dimension_name in selected_dimensions:
+            self._assert_dimension_exists(dimension_name)
+
+        return get_kmeans_centroids(n_clusters, self.data_frame[selected_dimensions])
+
+    def get_kmeans_clustering_mapping(self, n_clusters, selected_dimensions):
+        self._assert_dataset_was_loaded()
+
+        if selected_dimensions is None or len(selected_dimensions) == 0:
+            selected_dimensions = self.data_frame.columns
+
+        for dimension_name in selected_dimensions:
+            self._assert_dimension_exists(dimension_name)
+
+        return get_kmeans_clustering_mapping(n_clusters, self.data_frame[selected_dimensions])
