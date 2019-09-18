@@ -19,10 +19,10 @@
             "host": "localhost"
         },
         {
-            "name": "Python: Module",
+            "name": "Python: Grpc Module",
             "type": "python",
             "request": "launch",
-            "module": "enter-your-module-name-here",
+            "module": "immvis.rpc",
             "console": "integratedTerminal"
         },
         {
