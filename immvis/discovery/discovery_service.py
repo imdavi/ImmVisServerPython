@@ -14,10 +14,15 @@ class DiscoveryService():
     _magic = None
     _executor = futures.ThreadPoolExecutor(max_workers=2)
 
-    def __init__(self, port=5000, delay=5, magic=_MAGIC):
+    def __init__(self, port=5000, delay=5, magic=_MAGIC, debug=False):
         self._port = port
         self._delay = delay
         self._magic = magic
+        self._debug = debug
+    
+    def debug_print(self, message):
+        if self._debug:
+            print(str(message))
 
     def start(self):
         self._executor.submit(self.__broadcast)
@@ -28,21 +33,25 @@ class DiscoveryService():
         broadcast_socket.setsockopt(SOL_SOCKET, SO_BROADCAST, 1)
         current_ip = gethostbyname(gethostname())
 
+        self.debug_print('Starting broadcast!')
         while self._SHOULD_BROADCAST:
+            self.debug_print('Broadcasting...')
             data = Template("$magic:$ip").substitute(
                 magic=_MAGIC, ip=current_ip)
             broadcast_socket.sendto(str.encode(data), ('<broadcast>', self._port))
             time.sleep(self._delay)
 
+        self.debug_print('Stopped broadcast.')
         return
 
     def stop(self):
+        self.debug_print('Requested stop')
         self._SHOULD_BROADCAST = False
         self._executor.shutdown(wait=False)
 
 if __name__ == '__main__':
     print("Running service discovery...")
-    discovery_service = ImmVisDiscoveryService()
+    discovery_service = DiscoveryService(debug=True)
     discovery_service.start()
 
     try:

@@ -19,32 +19,20 @@
             "host": "localhost"
         },
         {
-            "name": "Python: Grpc Module",
+            "name": "Python: Immvis Grpc",
             "type": "python",
             "request": "launch",
             "module": "immvis.rpc",
             "console": "integratedTerminal"
         },
         {
-            "name": "Python: Django",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/manage.py",
-            "console": "integratedTerminal",
-            "args": [
-                "runserver",
-                "--noreload",
-                "--nothreading"
-            ],
-            "django": true
-        },
-        {
-            "name": "Python: Flask",
+            "name": "Python: Immvis Rest",
             "type": "python",
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "app.py"
+                "FLASK_APP": "immvis/rest/rest_server.py",
+                "FLASK_RUN_PORT": "8080"
             },
             "args": [
                 "run",
