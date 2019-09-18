@@ -122,11 +122,11 @@ class GrpcServicer(immvis_pb2_grpc.ImmVisServicer):
         return immvis_pb2.DimensionData(name=dimension_name, type=dimension_type, data=dimension_data)
 
     def GetDatasetValues(self, request_iterator, context):
-        dimensions = [dimension.name for dimension in request_iterator]
+        # dimensions = [dimension.name for dimension in request_iterator]
 
-        rows = self.data_manager.get_dataset_rows(dimensions)
+        rows = self.data_manager.get_dataset_rows()
 
-        for index, row in rows:
+        for index, row in enumerate(rows):
             row_values_str_list = map(
                 lambda value: str(value), row)
 
@@ -144,7 +144,7 @@ class GrpcServicer(immvis_pb2_grpc.ImmVisServicer):
     def GetCorrelationMatrix(self, request, context):
         correlation_matrix = self.data_manager.get_correlation_matrix()
 
-        for index, row in correlation_matrix:
+        for index, row in enumerate(correlation_matrix):
             row_values_str_list = map(
                 lambda value: str(value), row)
 
