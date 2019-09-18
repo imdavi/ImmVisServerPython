@@ -10,3 +10,4 @@ app = Flask(__name__)
 @app.route('/')
 def index():
   return 'Server Works!', status.HTTP_200_OK
+
