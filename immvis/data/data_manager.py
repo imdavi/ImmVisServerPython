@@ -62,7 +62,7 @@ class DataManager():
         for _, value in dimension_series.iteritems():
             yield value
 
-    def get_dataset_rows(self, selected_dimensions=None):
+    def get_dataset_rows(self, selected_dimensions=None, as_csv=False):
         self._assert_dataset_was_loaded()
 
         if selected_dimensions is None or len(selected_dimensions) == 0:
@@ -71,7 +71,12 @@ class DataManager():
         for dimension_name in selected_dimensions:
             self._assert_dimension_exists(dimension_name)
 
-        return get_data_frame_rows_as_list(self.data_frame[selected_dimensions])
+        filtered_data_frame = self.data_frame[selected_dimensions]
+
+        if as_csv:
+            return filtered_data_frame.to_csv(index=False)
+        else:
+            return get_data_frame_rows_as_list(filtered_data_frame)
 
     def get_correlation_between_two_dimensions(self, dimension1, dimension2):
         self._assert_dimension_exists(dimension1)
