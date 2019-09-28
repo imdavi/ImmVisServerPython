@@ -12,16 +12,15 @@ _FIELD_TYPE = 'type'
 _FIELD_CAUSE = 'cause'
 _FIELD_IMAGE_PATH = 'image_path'
 _FIELD_IMAGE = 'image'
+_FIELD_IMAGE_MODE = 'image_mode'
+_FIELD_IMAGE_FORMAT = 'image_format'
+_FIELD_IMAGE_HEIGHT = 'image_height'
+_FIELD_IMAGE_WIDTH = 'image_width'
 
 _TYPE_ERROR = 'error'
 _TYPE_GET_IMAGE = 'get_image'
 _TYPE_LOAD_IMAGE = 'load_image'
 _TYPE_IMAGE = 'image'
-
-def _get_image_bytes(image):
-    image_byte_array = io.BytesIO()
-    image.save(image_byte_array, format='TIFF')
-    return image_byte_array.getvalue()
 
 class ImmVisWebSocket(tornado.websocket.WebSocketHandler):
     image_path = None
@@ -72,12 +71,18 @@ class ImmVisWebSocket(tornado.websocket.WebSocketHandler):
             self.send_error_message(u'Image is not available')
 
     def send_image(self, image):
-        image_byte_array = _get_image_bytes(image)
-        image_string = str(base64.b64encode(image_byte_array))
+        buffer = io.BytesIO()
+        image.save(buffer, format=image.format)
+        image_string = base64.b64encode(buffer.getvalue()).decode('utf-8')
+        width, height = image.size
 
         response_message = self.create_response_message(
             {
                 _FIELD_TYPE : _TYPE_IMAGE,
+                _FIELD_IMAGE_FORMAT : image.format,
+                _FIELD_IMAGE_MODE : image.mode,
+                _FIELD_IMAGE_WIDTH : width,
+                _FIELD_IMAGE_HEIGHT : height,
                 _FIELD_IMAGE : image_string
             }
         )
