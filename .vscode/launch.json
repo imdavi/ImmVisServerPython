@@ -42,6 +42,13 @@
             "jinja": true
         },
         {
+            "name": "Python: Immvis Websocket",
+            "type": "python",
+            "request": "launch",
+            "module": "immvis.websocket",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "Python: Current File (External Terminal)",
             "type": "python",
             "request": "launch",

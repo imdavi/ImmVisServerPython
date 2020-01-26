@@ -2,11 +2,14 @@ from data.utils.dataset import open_dataset_file, get_data_frame_rows_as_list
 from data.utils.outliers import map_outliers, supports_outliers_check
 from data.utils.kmeans import get_kmeans_centroids, get_kmeans_clustering_mapping
 from data.utils.exceptions import DatasetNotAvailable, DimensionNotAvailable, NoDimensionsAvailableToMapOutliers
+from pandas import DataFrame
+from abc import ABC, abstractmethod
+
 
 class DataManager():
-    data_frame = None
+    data_frame: DataFrame = None
 
-    def __init__(self, data_frame=None):
+    def __init__(self, data_frame: DataFrame = None):
         self.data_frame = data_frame
 
     def _has_dimension(self, dimension_name):
@@ -103,7 +106,8 @@ class DataManager():
         dimensions = list(
             filter(
                 lambda dimension_name:
-                self._has_dimension(dimension_name) and supports_outliers_check(self.get_dimension_type(dimension_name)),
+                self._has_dimension(dimension_name) and supports_outliers_check(
+                    self.get_dimension_type(dimension_name)),
                 dimensions_to_check
             )
         )
