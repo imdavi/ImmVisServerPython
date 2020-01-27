@@ -1,7 +1,6 @@
 from tornado.websocket import WebSocketHandler
-from websocket.actions.action import Action, ActionResult
-
-from websocket.message_handler import MessageHandler
+from messagehandler.actions.action import Action, ActionResult
+from messagehandler.message_handler import MessageHandler
 
 class ImmVisWebSocket(WebSocketHandler):
 
