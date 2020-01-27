@@ -1,7 +1,7 @@
-from websocket.actions.action_result import ActionResult
-from websocket.message_parser import MessageParser
-from websocket.data_store import DataStore
-from websocket.response_builder import build_response_from_action_result, build_response_from_error
+from messagehandler.actions.action_result import ActionResult
+from messagehandler.message_parser import MessageParser
+from messagehandler.data_store import DataStore
+from messagehandler.response_builder import build_response_from_action_result, build_response_from_error
 
 
 class MessageHandler():

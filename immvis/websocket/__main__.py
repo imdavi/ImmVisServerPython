@@ -2,9 +2,9 @@ import tornado.ioloop
 import tornado.web
 import tornado.websocket
 from websocket.websocket_server import ImmVisWebSocket
-from websocket.message_parser import MessageParser
-from websocket.data_store import DataStore
-from websocket.message_handler import MessageHandler
+from messagehandler.message_parser import MessageParser
+from messagehandler.data_store import DataStore
+from messagehandler.message_handler import MessageHandler
 
 
 def create_app():

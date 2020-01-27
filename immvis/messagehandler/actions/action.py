@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from pandas import DataFrame
-from websocket.actions.action_result import ActionResult
+from messagehandler.actions.action_result import ActionResult
 
 
 class Action(ABC):

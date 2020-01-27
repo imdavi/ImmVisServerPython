@@ -1,7 +1,7 @@
 from kim import PolymorphicMapper, field
-from websocket.actions.action import Action
-from websocket.actions.load import LoadDataFrameFromFile
-from websocket.actions.hello import HelloAction
+from messagehandler.actions.action import Action
+from messagehandler.actions.load import LoadDataFrameFromFile
+from messagehandler.actions.hello import HelloAction
 
 
 class ActionMapper(PolymorphicMapper):

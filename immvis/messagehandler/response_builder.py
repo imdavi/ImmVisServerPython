@@ -1,5 +1,5 @@
-from websocket.actions.action import Action
-from websocket.actions.action_result import ActionResult
+from messagehandler.actions.action import Action
+from messagehandler.actions.action_result import ActionResult
 import json
 import numpy as np
 from data.utils.dataset import get_data_frame_rows_as_list

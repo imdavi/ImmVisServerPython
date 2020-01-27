@@ -1,5 +1,5 @@
-from websocket.actions.action_result import ActionResult
-from websocket.actions.action import TransformAction
+from messagehandler.actions.action_result import ActionResult
+from messagehandler.actions.action import TransformAction
 from pandas import DataFrame
 from kim import field
 from data.utils.dataset import open_dataset_file

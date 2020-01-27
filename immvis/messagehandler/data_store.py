@@ -1,5 +1,5 @@
-from websocket.actions.action import Action, TransformAction
-from websocket.actions.action_result import ActionResult
+from messagehandler.actions.action import Action, TransformAction
+from messagehandler.actions.action_result import ActionResult
 from pandas import DataFrame
 from abc import ABC
 

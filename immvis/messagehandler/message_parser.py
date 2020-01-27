@@ -1,7 +1,7 @@
 import json
 
-from websocket.actions.action import Action
-from websocket.actions.action_mapper import ActionMapper
+from messagehandler.actions.action import Action
+from messagehandler.actions.action_mapper import ActionMapper
 
 class MessageParser():
 
