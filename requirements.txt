@@ -12,3 +12,4 @@ seaborn
 flask
 connexion[swagger-ui]
 tornado
+py-kim
