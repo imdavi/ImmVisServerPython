@@ -1,5 +1,4 @@
 
-
 class ActionResult():
     data: object
     type_name: str

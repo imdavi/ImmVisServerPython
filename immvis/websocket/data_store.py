@@ -13,7 +13,7 @@ class DataStore():
         if result is not None:
             if isinstance(action, TransformAction):
                 if isinstance(result.data, DataFrame):
-                    self.data_frame = result.data_frame
+                    self.data_frame = result.data
                 else:
                     raise Exception(
                         'Results from transform must be a data_frame.')
