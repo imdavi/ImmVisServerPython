@@ -24,6 +24,9 @@ class DiscoveryService():
         if self._debug:
             print(str(message))
 
+    def is_running(self):
+        return self._SHOULD_BROADCAST
+
     def start(self):
         self._executor.submit(self.__broadcast)
 
@@ -33,6 +36,7 @@ class DiscoveryService():
         broadcast_socket.setsockopt(SOL_SOCKET, SO_BROADCAST, 1)
         current_ip = gethostbyname(gethostname())
 
+        self._SHOULD_BROADCAST = True
         self.debug_print('Starting broadcast!')
         while self._SHOULD_BROADCAST:
             self.debug_print('Broadcasting...')
@@ -48,6 +52,7 @@ class DiscoveryService():
         self.debug_print('Requested stop')
         self._SHOULD_BROADCAST = False
         self._executor.shutdown(wait=False)
+        self._executor = futures.ThreadPoolExecutor(max_workers=2)
 
 if __name__ == '__main__':
     print("Running service discovery...")

@@ -49,6 +49,7 @@ def _build_data_field(action_result: ActionResult):
 
 def build_response_from_error(error: Exception) -> str:
     error_obj = {
+        _FIELD_TYPE: _TYPE_ERROR,
         _FIELD_CAUSE: error.__class__.__name__
     }
 
