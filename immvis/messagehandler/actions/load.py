@@ -11,4 +11,4 @@ class LoadDataFrameFromFile(TransformAction):
     def process(self, data_frame: DataFrame) -> ActionResult:
         data_frame = open_dataset_file(self.file_path)
 
-        return ActionResult(data_frame, DataFrame.__name__)
+        return ActionResult('load_dataset_result', data_frame)

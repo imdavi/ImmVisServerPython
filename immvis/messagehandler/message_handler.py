@@ -18,7 +18,7 @@ class MessageHandler():
 
             result = self.data_store.run_action(action)
 
-            response = build_response_from_action_result(result, action)
+            response = build_response_from_action_result(result)
 
         except Exception as exception:
             response = build_response_from_error(exception)
