@@ -10,8 +10,9 @@ _TYPE_ERROR = 'error'
 _FIELD_TYPE = 'object_type'
 _FIELD_COLUMNS = 'columns'
 _FIELD_COLUMNS_TYPES = 'columns_types'
-_FIELD_VALUE = 'value'
+_FIELD_VALUES = 'values'
 _FIELD_DATA = 'data'
+_FIELD_AXIS_LABELS = 'axis_labels'
 
 
 def build_response_from_action_result(action_result: ActionResult) -> str:
@@ -33,7 +34,7 @@ def _build_data_field(data: object) -> object:
             if type(key) is str and value is not None:
                 data_obj[key] = value
     else:
-        data_obj[_FIELD_VALUE] = data
+        data_obj[_FIELD_VALUES] = data
 
     return data_obj
 
@@ -41,7 +42,7 @@ def _build_data_field(data: object) -> object:
 def _build_data_fields_from_data_frame(data_frame: DataFrame) -> dict:
     data_obj = {}
 
-    data_obj[_FIELD_VALUE] = _normalize_values(data_frame).to_csv(index=False)
+    data_obj[_FIELD_VALUES] = _normalize_values(data_frame).values
 
     data_obj[_FIELD_COLUMNS] = list(map(
         lambda column: str(column), data_frame.columns))
@@ -59,7 +60,7 @@ def _normalize_values(data_frame: DataFrame) -> DataFrame:
         column = result[column_name]
 
         if not np.issubdtype(column.dtype, np.number):
-            result[column_name] = column.factorize()[0]
+            column = column.factorize()[0]
 
         max_value = column.max()
 
