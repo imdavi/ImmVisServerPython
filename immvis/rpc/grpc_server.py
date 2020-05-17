@@ -1,9 +1,9 @@
 from concurrent import futures
 
 import grpc
-from proto import immvis_pb2_grpc
-from rpc.grpc_servicer import GrpcServicer
-from discovery.discovery_service import DiscoveryService
+from .proto import immvis_pb2_grpc
+from .grpc_servicer import GrpcServicer
+from ..discovery.discovery_service import DiscoveryService
 
 class ImmVisServer():
 

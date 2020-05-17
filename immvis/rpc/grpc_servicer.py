@@ -1,7 +1,6 @@
 
-from proto import immvis_pb2, immvis_pb2_grpc
-from data.data_manager import DataManager
-from data.utils.dataset import UnknownDatasetType
+from .proto import immvis_pb2, immvis_pb2_grpc
+from ..data import DataManager, UnknownDatasetType
 
 ERROR_CODE_UNKNOWN_EXTENSION = 1
 ERROR_CODE_CANNOT_OPEN_FILE = 2

@@ -1,7 +1,7 @@
-from data.utils.dataset import open_dataset_file, get_data_frame_rows_as_list
-from data.utils.outliers import map_outliers, supports_outliers_check
-from data.utils.kmeans import get_kmeans_centroids, get_kmeans_clustering_mapping
-from data.utils.exceptions import DatasetNotAvailable, DimensionNotAvailable, NoDimensionsAvailableToMapOutliers
+from .utils.dataset import open_dataset_file, get_data_frame_rows_as_list
+from .utils.outliers import map_outliers, supports_outliers_check
+from .utils.kmeans import get_kmeans_centroids, get_kmeans_clustering_mapping
+from .utils.exceptions import DatasetNotAvailable, DimensionNotAvailable, NoDimensionsAvailableToMapOutliers
 from pandas import DataFrame
 from abc import ABC, abstractmethod
 

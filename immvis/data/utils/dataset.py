@@ -1,7 +1,7 @@
-from data.utils.extutils import is_csv, is_excel, is_json, is_image
-from data.utils.imgdataset import read_image_as_dataframe
+from .extutils import is_csv, is_excel, is_json, is_image
+from .imgdataset import read_image_as_dataframe
 import pandas as pd
-from data.utils.exceptions import UnknownDatasetType
+from .exceptions import UnknownDatasetType
 
 def open_dataset_file(file_path):
     file_path = file_path.strip()

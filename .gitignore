@@ -2,9 +2,6 @@
 *.cs
 csharp/
 
-# Ignoring python generated files
-immvis_pb2*
-
 # Created by https://www.gitignore.io/api/python,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=python,visualstudiocode
 

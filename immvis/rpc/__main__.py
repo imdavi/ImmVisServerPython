@@ -1,4 +1,4 @@
-from rpc.grpc_server import ImmVisServer
+from .grpc_server import ImmVisServer
 from time import sleep
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
