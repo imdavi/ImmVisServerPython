@@ -10,22 +10,6 @@
             "request": "launch",
             "module": "immvis.rpc",
             "console": "integratedTerminal"
-        },
-        {
-            "name": "Python: Immvis Rest",
-            "type": "python",
-            "request": "launch",
-            "module": "flask",
-            "env": {
-                "FLASK_APP": "immvis/rest/rest_server.py",
-                "FLASK_RUN_PORT": "8080"
-            },
-            "args": [
-                "run",
-                "--no-debugger",
-                "--no-reload"
-            ],
-            "jinja": true
         }
     ]
 }

@@ -1,7 +1,8 @@
+wheel
 pandas
 protobuf
-grpcio
-grpcio-tools
+grpcio==1.26.0
+grpcio-tools==1.26.0
 numpy
 xlrd
 sklearn
@@ -9,7 +10,3 @@ filetype
 Pillow
 matplotlib
 seaborn
-flask
-connexion[swagger-ui]
-tornado
-py-kim
