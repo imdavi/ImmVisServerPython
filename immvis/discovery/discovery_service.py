@@ -37,7 +37,7 @@ class DiscoveryService():
         current_ip = gethostbyname(gethostname())
 
         self._SHOULD_BROADCAST = True
-        self.debug_print('Starting broadcast!')
+        self.debug_print('Starting discovery service.')
         while self._SHOULD_BROADCAST:
             self.debug_print('Broadcasting...')
             data = Template("$magic:$ip").substitute(
@@ -45,11 +45,11 @@ class DiscoveryService():
             broadcast_socket.sendto(str.encode(data), ('<broadcast>', self._port))
             time.sleep(self._delay)
 
-        self.debug_print('Stopped broadcast.')
+        self.debug_print('Stopped discovery service.')
         return
 
     def stop(self):
-        self.debug_print('Requested stop')
+        self.debug_print('Requested to stop the discovery service.')
         self._SHOULD_BROADCAST = False
         self._executor.shutdown(wait=False)
         self._executor = futures.ThreadPoolExecutor(max_workers=2)
@@ -64,3 +64,4 @@ if __name__ == '__main__':
             time.sleep(_ONE_DAY_IN_SECONDS)
     except KeyboardInterrupt:
         discovery_service.stop()
+        
