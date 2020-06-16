@@ -11,7 +11,7 @@ SET PROTO_FILE=%PROTO_DIR%\immvis.proto
 
 SET IMMVIS_DIR=%ROOT_DIR%\immvis
 
-SET OUT_DIR=%IMMVIS_DIR%\rpc\proto
+SET OUT_DIR=%IMMVIS_DIR%\grpc\proto
 MKDIR %OUT_DIR%
 
 if exist %PROTO_FILE% (

@@ -8,7 +8,7 @@
             "name": "Python: Immvis Grpc",
             "type": "python",
             "request": "launch",
-            "module": "immvis.rpc",
+            "module": "immvis.grpc",
             "console": "integratedTerminal"
         }
     ]

@@ -1,80 +1,38 @@
 syntax = "proto3";
 
+import "google/protobuf/empty.proto";
+
 service ImmVis {
-    rpc OpenDatasetFile(OpenDatasetFileRequest) returns (OpenDatasetFileResponse) {}
-    
-    rpc GetDatasetDimensions(Void) returns (stream DimensionInfo) {}
-
-    rpc GetDimensionDescriptiveStatistics(Dimension) returns (stream Feature) {}
-
-    rpc GetDimensionInfo(Dimension) returns (DimensionInfo) {}
-    
-    rpc GetDimensionData(stream Dimension) returns (stream DimensionData) {}
-
-    rpc GetOutlierMapping (stream Dimension) returns (DimensionData) {}
-
-    rpc GetKMeansCentroids (KMeansRequest) returns (stream KMeansCentroid) {}
-
-    rpc GetKMeansClusterMapping(KMeansRequest) returns (DimensionData) {}
-
-    rpc GetDatasetValues (Void) returns (stream DataRow) {}
-
-    rpc GetCorrelationBetweenTwoDimensions(CorrelationRequest) returns (FloatResult) {}
-
-    rpc GetCorrelationMatrix(Void) returns (stream DataRow);
+    rpc ListAvailableDatasets(google.protobuf.Empty) returns (AvailableDatasetsList) {};
+    rpc LoadDataset(LoadDatasetRequestMessage) returns (DatasetMetadata) {};
 }
 
-message Void {}
-
-message OpenDatasetFileRequest {
-    string filePath = 1;
+message AvailableDatasetsList {
+    repeated string datasetsPaths = 1;
 }
 
-message OpenDatasetFileResponse {
-    int32 responseCode = 1;
+message LoadDatasetRequestMessage {
+    string datasetPath = 1;
 }
 
-message DimensionInfo {
-    string name = 1;
+message Column {
+    string columnName = 1;
     string type = 2;
 }
 
-message DimensionData {
-    string name = 1;
-    string type = 2;
-    repeated string data = 3;
-}
-
-message DataRow {
-    int32 index = 1;
-    repeated string values = 2;
-}
-
-message Dimension {
-    string name = 1;
-}
-
-message CorrelationRequest {
-    Dimension dimension1 = 1;
-    Dimension dimension2 = 2;
-}
-
-message FloatResult {
-    float result = 1;
-}
-
-message KMeansRequest {
-    repeated Dimension dimensions = 1;
-    int32 numClusters = 2;
-}
-
-message KMeansCentroid {
-    string type = 1;
-    repeated string coordinates = 2;
-}
-
-message Feature {
+message DescriptiveStatisticsFeature {
     string name = 1;
     string value = 2;
     string type = 3;
+}
+
+message ColumnDescriptiveStatistics {
+    Column column = 1;
+    repeated DescriptiveStatisticsFeature descriptiveStatisticsFeatures = 2;
+}
+
+message DatasetMetadata {
+    int32 rowsCount = 1;
+    repeated Column columns = 2;
+    repeated ColumnDescriptiveStatistics columnsDescriptiveStatistics = 3;
 }

@@ -24,8 +24,9 @@ IF NOT EXIST %CSHARP_DIR% MKDIR %CSHARP_DIR%
 
 IF NOT EXIST %NUGET_DIR% MKDIR %NUGET_DIR%
 
+SET NUGET_URL="https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
+
 IF NOT EXIST %NUGET_FILE_PATH% (
-    SET NUGET_URL=https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
     powershell -Command "Invoke-WebRequest %NUGET_URL% -OutFile %NUGET_FILE_PATH%"
 ) 
 

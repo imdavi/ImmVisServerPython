@@ -8,7 +8,7 @@ PROTO_DIR=$ROOT_DIR/proto
 
 PROTO_FILE=$PROTO_DIR/immvis.proto
 
-OUT_DIR=$ROOT_DIR/immvis/rpc/proto
+OUT_DIR=$ROOT_DIR/immvis/grpc/proto
 
 if [ -f $PROTO_FILE ]; then
     echo Generating Python files...
