@@ -25,6 +25,11 @@ class ImmVisStub(object):
         request_serializer=immvis__pb2.LoadDatasetRequestMessage.SerializeToString,
         response_deserializer=immvis__pb2.DatasetMetadata.FromString,
         )
+    self.GetDatasetToPlot = channel.unary_unary(
+        '/ImmVis/GetDatasetToPlot',
+        request_serializer=immvis__pb2.GetDatasetToPlotRequestMessage.SerializeToString,
+        response_deserializer=immvis__pb2.DatasetToPlot.FromString,
+        )
 
 
 class ImmVisServicer(object):
@@ -45,6 +50,13 @@ class ImmVisServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def GetDatasetToPlot(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_ImmVisServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -57,6 +69,11 @@ def add_ImmVisServicer_to_server(servicer, server):
           servicer.LoadDataset,
           request_deserializer=immvis__pb2.LoadDatasetRequestMessage.FromString,
           response_serializer=immvis__pb2.DatasetMetadata.SerializeToString,
+      ),
+      'GetDatasetToPlot': grpc.unary_unary_rpc_method_handler(
+          servicer.GetDatasetToPlot,
+          request_deserializer=immvis__pb2.GetDatasetToPlotRequestMessage.FromString,
+          response_serializer=immvis__pb2.DatasetToPlot.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

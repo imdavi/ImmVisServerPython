@@ -5,11 +5,15 @@ from ..discovery import DiscoveryService
 from time import sleep
 from .proto import immvis_pb2_grpc
 from .immvis_grpc_servicer import ImmvisGrpcServicer
+from ..data import DataManager
 import grpc
 
 if __name__=='__main__':
+    print("Creating DataManager")
+    data_manager = DataManager()
+
     print("Creating ImmvisGrpcServicer")
-    immvis_grpc_servicer = ImmvisGrpcServicer()
+    immvis_grpc_servicer = ImmvisGrpcServicer(data_manager)
 
     print("Creating GRPC server...")
     grpc_server: grpc.Server = create_server()

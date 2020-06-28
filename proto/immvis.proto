@@ -5,6 +5,7 @@ import "google/protobuf/empty.proto";
 service ImmVis {
     rpc ListAvailableDatasets(google.protobuf.Empty) returns (AvailableDatasetsList) {};
     rpc LoadDataset(LoadDatasetRequestMessage) returns (DatasetMetadata) {};
+    rpc GetDatasetToPlot(GetDatasetToPlotRequestMessage) returns (DatasetToPlot) {}
 }
 
 message AvailableDatasetsList {
@@ -23,16 +24,28 @@ message Column {
 message DescriptiveStatisticsFeature {
     string name = 1;
     string value = 2;
-    string type = 3;
+    string featureType = 3;
 }
 
-message ColumnDescriptiveStatistics {
+message ColumnInfo {
     Column column = 1;
     repeated DescriptiveStatisticsFeature descriptiveStatisticsFeatures = 2;
 }
 
 message DatasetMetadata {
     int32 rowsCount = 1;
-    repeated Column columns = 2;
-    repeated ColumnDescriptiveStatistics columnsDescriptiveStatistics = 3;
+    int32 columnsCount = 2;
+    repeated ColumnInfo columnsInfo = 3;
+}
+
+message GetDatasetToPlotRequestMessage {
+    repeated string columnsNames = 1;
+}
+
+message DatasetToPlot {
+    repeated DatasetRow rows = 1;
+}
+
+message DatasetRow {
+    repeated float rowValues = 1;
 }
