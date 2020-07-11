@@ -11,7 +11,7 @@ class UnknownDatasetType(Exception):
 def load_data_frame(dataset_path: str) -> DataFrame:
     datasets_folder_path = get_datasets_folder_path()
 
-    path_on_datasets_folder = join(datasets_folder_path, datasets_folder_path)
+    path_on_datasets_folder = join(datasets_folder_path, dataset_path)
 
     path_to_open = path_on_datasets_folder
 

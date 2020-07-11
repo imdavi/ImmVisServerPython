@@ -5,7 +5,7 @@ from ..data.data_manager import DataManager
 from .mappers import get_dataset_metadata, map_dataset_to_plot
 
 
-class ImmvisGrpcServicer(immvis_pb2_grpc.ImmVisServicer):
+class ImmvisGrpcServicer(immvis_pb2_grpc.ImmVisPandasServicer):
 
     _data_manager:DataManager = None
 

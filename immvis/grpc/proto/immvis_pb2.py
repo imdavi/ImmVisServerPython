@@ -13,7 +13,6 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -21,11 +20,34 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cimmvis.proto\x1a\x1bgoogle/protobuf/empty.proto\".\n\x15\x41vailableDatasetsList\x12\x15\n\rdatasetsPaths\x18\x01 \x03(\t\"0\n\x19LoadDatasetRequestMessage\x12\x13\n\x0b\x64\x61tasetPath\x18\x01 \x01(\t\"*\n\x06\x43olumn\x12\x12\n\ncolumnName\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"P\n\x1c\x44\x65scriptiveStatisticsFeature\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x01(\t\"k\n\nColumnInfo\x12\x17\n\x06\x63olumn\x18\x01 \x01(\x0b\x32\x07.Column\x12\x44\n\x1d\x64\x65scriptiveStatisticsFeatures\x18\x02 \x03(\x0b\x32\x1d.DescriptiveStatisticsFeature\"\\\n\x0f\x44\x61tasetMetadata\x12\x11\n\trowsCount\x18\x01 \x01(\x05\x12\x14\n\x0c\x63olumnsCount\x18\x02 \x01(\x05\x12 \n\x0b\x63olumnsInfo\x18\x03 \x03(\x0b\x32\x0b.ColumnInfo\"6\n\x1eGetDatasetToPlotRequestMessage\x12\x14\n\x0c\x63olumnsNames\x18\x01 \x03(\t\"*\n\rDatasetToPlot\x12\x19\n\x04rows\x18\x01 \x03(\x0b\x32\x0b.DatasetRow\"\x1f\n\nDatasetRow\x12\x11\n\trowValues\x18\x01 \x03(\x02\x32\xd9\x01\n\x06ImmVis\x12I\n\x15ListAvailableDatasets\x12\x16.google.protobuf.Empty\x1a\x16.AvailableDatasetsList\"\x00\x12=\n\x0bLoadDataset\x12\x1a.LoadDatasetRequestMessage\x1a\x10.DatasetMetadata\"\x00\x12\x45\n\x10GetDatasetToPlot\x12\x1f.GetDatasetToPlotRequestMessage\x1a\x0e.DatasetToPlot\"\x00\x62\x06proto3')
-  ,
-  dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,])
+  serialized_pb=_b('\n\x0cimmvis.proto\"\x07\n\x05\x45mpty\".\n\x15\x41vailableDatasetsList\x12\x15\n\rdatasetsPaths\x18\x01 \x03(\t\"0\n\x19LoadDatasetRequestMessage\x12\x13\n\x0b\x64\x61tasetPath\x18\x01 \x01(\t\"*\n\x06\x43olumn\x12\x12\n\ncolumnName\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"P\n\x1c\x44\x65scriptiveStatisticsFeature\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x01(\t\"k\n\nColumnInfo\x12\x17\n\x06\x63olumn\x18\x01 \x01(\x0b\x32\x07.Column\x12\x44\n\x1d\x64\x65scriptiveStatisticsFeatures\x18\x02 \x03(\x0b\x32\x1d.DescriptiveStatisticsFeature\"\\\n\x0f\x44\x61tasetMetadata\x12\x11\n\trowsCount\x18\x01 \x01(\x05\x12\x14\n\x0c\x63olumnsCount\x18\x02 \x01(\x05\x12 \n\x0b\x63olumnsInfo\x18\x03 \x03(\x0b\x32\x0b.ColumnInfo\"6\n\x1eGetDatasetToPlotRequestMessage\x12\x14\n\x0c\x63olumnsNames\x18\x01 \x03(\t\"*\n\rDatasetToPlot\x12\x19\n\x04rows\x18\x01 \x03(\x0b\x32\x0b.DatasetRow\"\x1f\n\nDatasetRow\x12\x11\n\trowValues\x18\x01 \x03(\x02\x32\xcf\x01\n\x0cImmVisPandas\x12\x39\n\x15ListAvailableDatasets\x12\x06.Empty\x1a\x16.AvailableDatasetsList\"\x00\x12=\n\x0bLoadDataset\x12\x1a.LoadDatasetRequestMessage\x1a\x10.DatasetMetadata\"\x00\x12\x45\n\x10GetDatasetToPlot\x12\x1f.GetDatasetToPlotRequestMessage\x1a\x0e.DatasetToPlot\"\x00\x62\x06proto3')
+)
 
 
+
+
+_EMPTY = _descriptor.Descriptor(
+  name='Empty',
+  full_name='Empty',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=16,
+  serialized_end=23,
+)
 
 
 _AVAILABLEDATASETSLIST = _descriptor.Descriptor(
@@ -54,8 +76,8 @@ _AVAILABLEDATASETSLIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=45,
-  serialized_end=91,
+  serialized_start=25,
+  serialized_end=71,
 )
 
 
@@ -85,8 +107,8 @@ _LOADDATASETREQUESTMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=93,
-  serialized_end=141,
+  serialized_start=73,
+  serialized_end=121,
 )
 
 
@@ -123,8 +145,8 @@ _COLUMN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=143,
-  serialized_end=185,
+  serialized_start=123,
+  serialized_end=165,
 )
 
 
@@ -168,8 +190,8 @@ _DESCRIPTIVESTATISTICSFEATURE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=187,
-  serialized_end=267,
+  serialized_start=167,
+  serialized_end=247,
 )
 
 
@@ -206,8 +228,8 @@ _COLUMNINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=269,
-  serialized_end=376,
+  serialized_start=249,
+  serialized_end=356,
 )
 
 
@@ -251,8 +273,8 @@ _DATASETMETADATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=378,
-  serialized_end=470,
+  serialized_start=358,
+  serialized_end=450,
 )
 
 
@@ -282,8 +304,8 @@ _GETDATASETTOPLOTREQUESTMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=472,
-  serialized_end=526,
+  serialized_start=452,
+  serialized_end=506,
 )
 
 
@@ -313,8 +335,8 @@ _DATASETTOPLOT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=528,
-  serialized_end=570,
+  serialized_start=508,
+  serialized_end=550,
 )
 
 
@@ -344,14 +366,15 @@ _DATASETROW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=572,
-  serialized_end=603,
+  serialized_start=552,
+  serialized_end=583,
 )
 
 _COLUMNINFO.fields_by_name['column'].message_type = _COLUMN
 _COLUMNINFO.fields_by_name['descriptiveStatisticsFeatures'].message_type = _DESCRIPTIVESTATISTICSFEATURE
 _DATASETMETADATA.fields_by_name['columnsInfo'].message_type = _COLUMNINFO
 _DATASETTOPLOT.fields_by_name['rows'].message_type = _DATASETROW
+DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['AvailableDatasetsList'] = _AVAILABLEDATASETSLIST
 DESCRIPTOR.message_types_by_name['LoadDatasetRequestMessage'] = _LOADDATASETREQUESTMESSAGE
 DESCRIPTOR.message_types_by_name['Column'] = _COLUMN
@@ -362,6 +385,13 @@ DESCRIPTOR.message_types_by_name['GetDatasetToPlotRequestMessage'] = _GETDATASET
 DESCRIPTOR.message_types_by_name['DatasetToPlot'] = _DATASETTOPLOT
 DESCRIPTOR.message_types_by_name['DatasetRow'] = _DATASETROW
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
+  'DESCRIPTOR' : _EMPTY,
+  '__module__' : 'immvis_pb2'
+  # @@protoc_insertion_point(class_scope:Empty)
+  })
+_sym_db.RegisterMessage(Empty)
 
 AvailableDatasetsList = _reflection.GeneratedProtocolMessageType('AvailableDatasetsList', (_message.Message,), {
   'DESCRIPTOR' : _AVAILABLEDATASETSLIST,
@@ -428,27 +458,27 @@ _sym_db.RegisterMessage(DatasetRow)
 
 
 
-_IMMVIS = _descriptor.ServiceDescriptor(
-  name='ImmVis',
-  full_name='ImmVis',
+_IMMVISPANDAS = _descriptor.ServiceDescriptor(
+  name='ImmVisPandas',
+  full_name='ImmVisPandas',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=606,
-  serialized_end=823,
+  serialized_start=586,
+  serialized_end=793,
   methods=[
   _descriptor.MethodDescriptor(
     name='ListAvailableDatasets',
-    full_name='ImmVis.ListAvailableDatasets',
+    full_name='ImmVisPandas.ListAvailableDatasets',
     index=0,
     containing_service=None,
-    input_type=google_dot_protobuf_dot_empty__pb2._EMPTY,
+    input_type=_EMPTY,
     output_type=_AVAILABLEDATASETSLIST,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
     name='LoadDataset',
-    full_name='ImmVis.LoadDataset',
+    full_name='ImmVisPandas.LoadDataset',
     index=1,
     containing_service=None,
     input_type=_LOADDATASETREQUESTMESSAGE,
@@ -457,7 +487,7 @@ _IMMVIS = _descriptor.ServiceDescriptor(
   ),
   _descriptor.MethodDescriptor(
     name='GetDatasetToPlot',
-    full_name='ImmVis.GetDatasetToPlot',
+    full_name='ImmVisPandas.GetDatasetToPlot',
     index=2,
     containing_service=None,
     input_type=_GETDATASETTOPLOTREQUESTMESSAGE,
@@ -465,8 +495,8 @@ _IMMVIS = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
 ])
-_sym_db.RegisterServiceDescriptor(_IMMVIS)
+_sym_db.RegisterServiceDescriptor(_IMMVISPANDAS)
 
-DESCRIPTOR.services_by_name['ImmVis'] = _IMMVIS
+DESCRIPTOR.services_by_name['ImmVisPandas'] = _IMMVISPANDAS
 
 # @@protoc_insertion_point(module_scope)

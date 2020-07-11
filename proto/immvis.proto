@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-import "google/protobuf/empty.proto";
-
-service ImmVis {
-    rpc ListAvailableDatasets(google.protobuf.Empty) returns (AvailableDatasetsList) {};
+service ImmVisPandas {
+    rpc ListAvailableDatasets(Empty) returns (AvailableDatasetsList) {};
     rpc LoadDataset(LoadDatasetRequestMessage) returns (DatasetMetadata) {};
     rpc GetDatasetToPlot(GetDatasetToPlotRequestMessage) returns (DatasetToPlot) {}
 }
+
+message Empty {}
 
 message AvailableDatasetsList {
     repeated string datasetsPaths = 1;
