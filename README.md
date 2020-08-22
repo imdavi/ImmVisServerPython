@@ -1,7 +1,3 @@
-# Deprecation warning
-
-After some experiments with GRPC, rest and websocket, we decided to deprecate this library in favor of using websockets. In order to simplify the work with it, we moved the websockets experiments to https://github.com/imdavi/immvis-server-websocket, where the development will continue.
-
 # ImmVis (Server)
 
 This is the server side project from ImmVis, a platform that aims to connect different data visualization platforms to a data analysis service written in Python.
