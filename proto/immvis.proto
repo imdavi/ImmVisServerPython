@@ -2,8 +2,8 @@ syntax = "proto3";
 
 service ImmVisPandas {
     rpc ListAvailableDatasets(Empty) returns (AvailableDatasetsList) {};
-    rpc LoadDataset(LoadDatasetRequestMessage) returns (DatasetMetadata) {};
-    rpc GetDatasetToPlot(GetDatasetToPlotRequestMessage) returns (DatasetToPlot) {}
+    rpc LoadDataset(LoadDatasetRequest) returns (DatasetMetadata) {};
+    rpc GetNormalisedDataset(GetNormalisedDatasetRequest) returns (NormalisedDataset) {}
 }
 
 message Empty {}
@@ -12,7 +12,7 @@ message AvailableDatasetsList {
     repeated string datasetsPaths = 1;
 }
 
-message LoadDatasetRequestMessage {
+message LoadDatasetRequest {
     string datasetPath = 1;
 }
 
@@ -38,14 +38,14 @@ message DatasetMetadata {
     repeated ColumnInfo columnsInfo = 3;
 }
 
-message GetDatasetToPlotRequestMessage {
+message GetNormalisedDatasetRequest {
     repeated string columnsNames = 1;
 }
 
-message DatasetToPlot {
-    repeated DatasetRow rows = 1;
+message NormalisedDataset {
+    repeated NormalisedRow rows = 1;
 }
 
-message DatasetRow {
-    repeated float rowValues = 1;
+message NormalisedRow {
+    repeated float values = 1;
 }

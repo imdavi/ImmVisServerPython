@@ -1,6 +1,6 @@
 from pandas import DataFrame
 import typing
-from .utils import list_available_datasets, load_data_frame, get_dataset
+from .utils import list_available_datasets, load_data_frame, normalise_data_frame
 
 
 class DataManager():
@@ -16,5 +16,12 @@ class DataManager():
         self.data_frame = load_data_frame(dataset_path)
         return self.data_frame
 
-    def get_dataset_to_plot(self, columns_to_plot: typing.List[str]):
-        return get_dataset(self.data_frame, columns_to_plot)
+    def get_normalised_dataset(self, columns: typing.List[str]):
+        data_frame_to_normalise: DataFrame = None
+
+        if len(columns) > 0:
+            data_frame_to_normalise = self.data_frame[columns]
+        else:
+            data_frame_to_normalise = self.data_frame
+
+        return normalise_data_frame(data_frame_to_normalise)

@@ -1,8 +1,8 @@
 
 from .proto import immvis_pb2_grpc
-from .proto.immvis_pb2 import AvailableDatasetsList, DatasetMetadata
+from .proto.immvis_pb2 import AvailableDatasetsList, DatasetMetadata, NormalisedDataset, NormalisedRow
 from ..data.data_manager import DataManager
-from .mappers import get_dataset_metadata, map_dataset_to_plot
+from .mappers import get_dataset_metadata
 
 
 class ImmvisGrpcServicer(immvis_pb2_grpc.ImmVisPandasServicer):
@@ -23,9 +23,9 @@ class ImmvisGrpcServicer(immvis_pb2_grpc.ImmVisPandasServicer):
         
         return get_dataset_metadata(dataset)
 
-    def GetDatasetToPlot(self, request, context):
-        columns_to_plot = request.columnsNames
+    def GetNormalisedDataset(self, request, context):
+        columns_names = request.columnsNames
 
-        dataset = self._data_manager.get_dataset_to_plot(columns_to_plot)
+        normalised_data_frame = self._data_manager.get_normalised_dataset(columns_names)
 
-        return map_dataset_to_plot(dataset)
+        return NormalisedDataset(rows=list(map(lambda row: NormalisedRow(values=row), normalised_data_frame.values)))

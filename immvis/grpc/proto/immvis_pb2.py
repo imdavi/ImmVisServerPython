@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cimmvis.proto\"\x07\n\x05\x45mpty\".\n\x15\x41vailableDatasetsList\x12\x15\n\rdatasetsPaths\x18\x01 \x03(\t\"0\n\x19LoadDatasetRequestMessage\x12\x13\n\x0b\x64\x61tasetPath\x18\x01 \x01(\t\"*\n\x06\x43olumn\x12\x12\n\ncolumnName\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"P\n\x1c\x44\x65scriptiveStatisticsFeature\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x01(\t\"k\n\nColumnInfo\x12\x17\n\x06\x63olumn\x18\x01 \x01(\x0b\x32\x07.Column\x12\x44\n\x1d\x64\x65scriptiveStatisticsFeatures\x18\x02 \x03(\x0b\x32\x1d.DescriptiveStatisticsFeature\"\\\n\x0f\x44\x61tasetMetadata\x12\x11\n\trowsCount\x18\x01 \x01(\x05\x12\x14\n\x0c\x63olumnsCount\x18\x02 \x01(\x05\x12 \n\x0b\x63olumnsInfo\x18\x03 \x03(\x0b\x32\x0b.ColumnInfo\"6\n\x1eGetDatasetToPlotRequestMessage\x12\x14\n\x0c\x63olumnsNames\x18\x01 \x03(\t\"*\n\rDatasetToPlot\x12\x19\n\x04rows\x18\x01 \x03(\x0b\x32\x0b.DatasetRow\"\x1f\n\nDatasetRow\x12\x11\n\trowValues\x18\x01 \x03(\x02\x32\xcf\x01\n\x0cImmVisPandas\x12\x39\n\x15ListAvailableDatasets\x12\x06.Empty\x1a\x16.AvailableDatasetsList\"\x00\x12=\n\x0bLoadDataset\x12\x1a.LoadDatasetRequestMessage\x1a\x10.DatasetMetadata\"\x00\x12\x45\n\x10GetDatasetToPlot\x12\x1f.GetDatasetToPlotRequestMessage\x1a\x0e.DatasetToPlot\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0cimmvis.proto\"\x07\n\x05\x45mpty\".\n\x15\x41vailableDatasetsList\x12\x15\n\rdatasetsPaths\x18\x01 \x03(\t\")\n\x12LoadDatasetRequest\x12\x13\n\x0b\x64\x61tasetPath\x18\x01 \x01(\t\"*\n\x06\x43olumn\x12\x12\n\ncolumnName\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"P\n\x1c\x44\x65scriptiveStatisticsFeature\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x01(\t\"k\n\nColumnInfo\x12\x17\n\x06\x63olumn\x18\x01 \x01(\x0b\x32\x07.Column\x12\x44\n\x1d\x64\x65scriptiveStatisticsFeatures\x18\x02 \x03(\x0b\x32\x1d.DescriptiveStatisticsFeature\"\\\n\x0f\x44\x61tasetMetadata\x12\x11\n\trowsCount\x18\x01 \x01(\x05\x12\x14\n\x0c\x63olumnsCount\x18\x02 \x01(\x05\x12 \n\x0b\x63olumnsInfo\x18\x03 \x03(\x0b\x32\x0b.ColumnInfo\"3\n\x1bGetNormalisedDatasetRequest\x12\x14\n\x0c\x63olumnsNames\x18\x01 \x03(\t\"1\n\x11NormalisedDataset\x12\x1c\n\x04rows\x18\x01 \x03(\x0b\x32\x0e.NormalisedRow\"\x1f\n\rNormalisedRow\x12\x0e\n\x06values\x18\x01 \x03(\x02\x32\xcd\x01\n\x0cImmVisPandas\x12\x39\n\x15ListAvailableDatasets\x12\x06.Empty\x1a\x16.AvailableDatasetsList\"\x00\x12\x36\n\x0bLoadDataset\x12\x13.LoadDatasetRequest\x1a\x10.DatasetMetadata\"\x00\x12J\n\x14GetNormalisedDataset\x12\x1c.GetNormalisedDatasetRequest\x1a\x12.NormalisedDataset\"\x00\x62\x06proto3')
 )
 
 
@@ -81,15 +81,15 @@ _AVAILABLEDATASETSLIST = _descriptor.Descriptor(
 )
 
 
-_LOADDATASETREQUESTMESSAGE = _descriptor.Descriptor(
-  name='LoadDatasetRequestMessage',
-  full_name='LoadDatasetRequestMessage',
+_LOADDATASETREQUEST = _descriptor.Descriptor(
+  name='LoadDatasetRequest',
+  full_name='LoadDatasetRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='datasetPath', full_name='LoadDatasetRequestMessage.datasetPath', index=0,
+      name='datasetPath', full_name='LoadDatasetRequest.datasetPath', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -108,7 +108,7 @@ _LOADDATASETREQUESTMESSAGE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=73,
-  serialized_end=121,
+  serialized_end=114,
 )
 
 
@@ -145,8 +145,8 @@ _COLUMN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=123,
-  serialized_end=165,
+  serialized_start=116,
+  serialized_end=158,
 )
 
 
@@ -190,8 +190,8 @@ _DESCRIPTIVESTATISTICSFEATURE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=167,
-  serialized_end=247,
+  serialized_start=160,
+  serialized_end=240,
 )
 
 
@@ -228,8 +228,8 @@ _COLUMNINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=249,
-  serialized_end=356,
+  serialized_start=242,
+  serialized_end=349,
 )
 
 
@@ -273,20 +273,20 @@ _DATASETMETADATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=358,
-  serialized_end=450,
+  serialized_start=351,
+  serialized_end=443,
 )
 
 
-_GETDATASETTOPLOTREQUESTMESSAGE = _descriptor.Descriptor(
-  name='GetDatasetToPlotRequestMessage',
-  full_name='GetDatasetToPlotRequestMessage',
+_GETNORMALISEDDATASETREQUEST = _descriptor.Descriptor(
+  name='GetNormalisedDatasetRequest',
+  full_name='GetNormalisedDatasetRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='columnsNames', full_name='GetDatasetToPlotRequestMessage.columnsNames', index=0,
+      name='columnsNames', full_name='GetNormalisedDatasetRequest.columnsNames', index=0,
       number=1, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -304,20 +304,20 @@ _GETDATASETTOPLOTREQUESTMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=452,
-  serialized_end=506,
+  serialized_start=445,
+  serialized_end=496,
 )
 
 
-_DATASETTOPLOT = _descriptor.Descriptor(
-  name='DatasetToPlot',
-  full_name='DatasetToPlot',
+_NORMALISEDDATASET = _descriptor.Descriptor(
+  name='NormalisedDataset',
+  full_name='NormalisedDataset',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='rows', full_name='DatasetToPlot.rows', index=0,
+      name='rows', full_name='NormalisedDataset.rows', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -335,20 +335,20 @@ _DATASETTOPLOT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=508,
-  serialized_end=550,
+  serialized_start=498,
+  serialized_end=547,
 )
 
 
-_DATASETROW = _descriptor.Descriptor(
-  name='DatasetRow',
-  full_name='DatasetRow',
+_NORMALISEDROW = _descriptor.Descriptor(
+  name='NormalisedRow',
+  full_name='NormalisedRow',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='rowValues', full_name='DatasetRow.rowValues', index=0,
+      name='values', full_name='NormalisedRow.values', index=0,
       number=1, type=2, cpp_type=6, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -366,24 +366,24 @@ _DATASETROW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=552,
-  serialized_end=583,
+  serialized_start=549,
+  serialized_end=580,
 )
 
 _COLUMNINFO.fields_by_name['column'].message_type = _COLUMN
 _COLUMNINFO.fields_by_name['descriptiveStatisticsFeatures'].message_type = _DESCRIPTIVESTATISTICSFEATURE
 _DATASETMETADATA.fields_by_name['columnsInfo'].message_type = _COLUMNINFO
-_DATASETTOPLOT.fields_by_name['rows'].message_type = _DATASETROW
+_NORMALISEDDATASET.fields_by_name['rows'].message_type = _NORMALISEDROW
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['AvailableDatasetsList'] = _AVAILABLEDATASETSLIST
-DESCRIPTOR.message_types_by_name['LoadDatasetRequestMessage'] = _LOADDATASETREQUESTMESSAGE
+DESCRIPTOR.message_types_by_name['LoadDatasetRequest'] = _LOADDATASETREQUEST
 DESCRIPTOR.message_types_by_name['Column'] = _COLUMN
 DESCRIPTOR.message_types_by_name['DescriptiveStatisticsFeature'] = _DESCRIPTIVESTATISTICSFEATURE
 DESCRIPTOR.message_types_by_name['ColumnInfo'] = _COLUMNINFO
 DESCRIPTOR.message_types_by_name['DatasetMetadata'] = _DATASETMETADATA
-DESCRIPTOR.message_types_by_name['GetDatasetToPlotRequestMessage'] = _GETDATASETTOPLOTREQUESTMESSAGE
-DESCRIPTOR.message_types_by_name['DatasetToPlot'] = _DATASETTOPLOT
-DESCRIPTOR.message_types_by_name['DatasetRow'] = _DATASETROW
+DESCRIPTOR.message_types_by_name['GetNormalisedDatasetRequest'] = _GETNORMALISEDDATASETREQUEST
+DESCRIPTOR.message_types_by_name['NormalisedDataset'] = _NORMALISEDDATASET
+DESCRIPTOR.message_types_by_name['NormalisedRow'] = _NORMALISEDROW
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
@@ -400,12 +400,12 @@ AvailableDatasetsList = _reflection.GeneratedProtocolMessageType('AvailableDatas
   })
 _sym_db.RegisterMessage(AvailableDatasetsList)
 
-LoadDatasetRequestMessage = _reflection.GeneratedProtocolMessageType('LoadDatasetRequestMessage', (_message.Message,), {
-  'DESCRIPTOR' : _LOADDATASETREQUESTMESSAGE,
+LoadDatasetRequest = _reflection.GeneratedProtocolMessageType('LoadDatasetRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LOADDATASETREQUEST,
   '__module__' : 'immvis_pb2'
-  # @@protoc_insertion_point(class_scope:LoadDatasetRequestMessage)
+  # @@protoc_insertion_point(class_scope:LoadDatasetRequest)
   })
-_sym_db.RegisterMessage(LoadDatasetRequestMessage)
+_sym_db.RegisterMessage(LoadDatasetRequest)
 
 Column = _reflection.GeneratedProtocolMessageType('Column', (_message.Message,), {
   'DESCRIPTOR' : _COLUMN,
@@ -435,26 +435,26 @@ DatasetMetadata = _reflection.GeneratedProtocolMessageType('DatasetMetadata', (_
   })
 _sym_db.RegisterMessage(DatasetMetadata)
 
-GetDatasetToPlotRequestMessage = _reflection.GeneratedProtocolMessageType('GetDatasetToPlotRequestMessage', (_message.Message,), {
-  'DESCRIPTOR' : _GETDATASETTOPLOTREQUESTMESSAGE,
+GetNormalisedDatasetRequest = _reflection.GeneratedProtocolMessageType('GetNormalisedDatasetRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETNORMALISEDDATASETREQUEST,
   '__module__' : 'immvis_pb2'
-  # @@protoc_insertion_point(class_scope:GetDatasetToPlotRequestMessage)
+  # @@protoc_insertion_point(class_scope:GetNormalisedDatasetRequest)
   })
-_sym_db.RegisterMessage(GetDatasetToPlotRequestMessage)
+_sym_db.RegisterMessage(GetNormalisedDatasetRequest)
 
-DatasetToPlot = _reflection.GeneratedProtocolMessageType('DatasetToPlot', (_message.Message,), {
-  'DESCRIPTOR' : _DATASETTOPLOT,
+NormalisedDataset = _reflection.GeneratedProtocolMessageType('NormalisedDataset', (_message.Message,), {
+  'DESCRIPTOR' : _NORMALISEDDATASET,
   '__module__' : 'immvis_pb2'
-  # @@protoc_insertion_point(class_scope:DatasetToPlot)
+  # @@protoc_insertion_point(class_scope:NormalisedDataset)
   })
-_sym_db.RegisterMessage(DatasetToPlot)
+_sym_db.RegisterMessage(NormalisedDataset)
 
-DatasetRow = _reflection.GeneratedProtocolMessageType('DatasetRow', (_message.Message,), {
-  'DESCRIPTOR' : _DATASETROW,
+NormalisedRow = _reflection.GeneratedProtocolMessageType('NormalisedRow', (_message.Message,), {
+  'DESCRIPTOR' : _NORMALISEDROW,
   '__module__' : 'immvis_pb2'
-  # @@protoc_insertion_point(class_scope:DatasetRow)
+  # @@protoc_insertion_point(class_scope:NormalisedRow)
   })
-_sym_db.RegisterMessage(DatasetRow)
+_sym_db.RegisterMessage(NormalisedRow)
 
 
 
@@ -464,8 +464,8 @@ _IMMVISPANDAS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=586,
-  serialized_end=793,
+  serialized_start=583,
+  serialized_end=788,
   methods=[
   _descriptor.MethodDescriptor(
     name='ListAvailableDatasets',
@@ -481,17 +481,17 @@ _IMMVISPANDAS = _descriptor.ServiceDescriptor(
     full_name='ImmVisPandas.LoadDataset',
     index=1,
     containing_service=None,
-    input_type=_LOADDATASETREQUESTMESSAGE,
+    input_type=_LOADDATASETREQUEST,
     output_type=_DATASETMETADATA,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='GetDatasetToPlot',
-    full_name='ImmVisPandas.GetDatasetToPlot',
+    name='GetNormalisedDataset',
+    full_name='ImmVisPandas.GetNormalisedDataset',
     index=2,
     containing_service=None,
-    input_type=_GETDATASETTOPLOTREQUESTMESSAGE,
-    output_type=_DATASETTOPLOT,
+    input_type=_GETNORMALISEDDATASETREQUEST,
+    output_type=_NORMALISEDDATASET,
     serialized_options=None,
   ),
 ])

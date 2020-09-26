@@ -21,13 +21,13 @@ class ImmVisPandasStub(object):
         )
     self.LoadDataset = channel.unary_unary(
         '/ImmVisPandas/LoadDataset',
-        request_serializer=immvis__pb2.LoadDatasetRequestMessage.SerializeToString,
+        request_serializer=immvis__pb2.LoadDatasetRequest.SerializeToString,
         response_deserializer=immvis__pb2.DatasetMetadata.FromString,
         )
-    self.GetDatasetToPlot = channel.unary_unary(
-        '/ImmVisPandas/GetDatasetToPlot',
-        request_serializer=immvis__pb2.GetDatasetToPlotRequestMessage.SerializeToString,
-        response_deserializer=immvis__pb2.DatasetToPlot.FromString,
+    self.GetNormalisedDataset = channel.unary_unary(
+        '/ImmVisPandas/GetNormalisedDataset',
+        request_serializer=immvis__pb2.GetNormalisedDatasetRequest.SerializeToString,
+        response_deserializer=immvis__pb2.NormalisedDataset.FromString,
         )
 
 
@@ -49,7 +49,7 @@ class ImmVisPandasServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def GetDatasetToPlot(self, request, context):
+  def GetNormalisedDataset(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -66,13 +66,13 @@ def add_ImmVisPandasServicer_to_server(servicer, server):
       ),
       'LoadDataset': grpc.unary_unary_rpc_method_handler(
           servicer.LoadDataset,
-          request_deserializer=immvis__pb2.LoadDatasetRequestMessage.FromString,
+          request_deserializer=immvis__pb2.LoadDatasetRequest.FromString,
           response_serializer=immvis__pb2.DatasetMetadata.SerializeToString,
       ),
-      'GetDatasetToPlot': grpc.unary_unary_rpc_method_handler(
-          servicer.GetDatasetToPlot,
-          request_deserializer=immvis__pb2.GetDatasetToPlotRequestMessage.FromString,
-          response_serializer=immvis__pb2.DatasetToPlot.SerializeToString,
+      'GetNormalisedDataset': grpc.unary_unary_rpc_method_handler(
+          servicer.GetNormalisedDataset,
+          request_deserializer=immvis__pb2.GetNormalisedDatasetRequest.FromString,
+          response_serializer=immvis__pb2.NormalisedDataset.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
