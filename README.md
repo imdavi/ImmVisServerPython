@@ -10,7 +10,6 @@ Here is a really small architecture diagram about how it works:
 
 ![Image of Yaktocat](imgs/highlevel-architecture.png)
 
-
 ## Setup
 
 To develop for the server side, you should have installed [Python](https://www.python.org/) (3.6+) and [PIP](https://pypi.org/project/pip/) (latest version available). 
@@ -24,9 +23,9 @@ Currently there are two ways of running the server:
 * From the root directory of the project run the following command: `python -m immvis.grpc`
 * Open the root folder with [Visual Studio Code](https://code.visualstudio.com/) and run the debug task `Python: Immvis Grpc`
 
-## Loading datasets
+## Loading data sets
 
-The `LoadDataset` method is able to load datasets from any local path or remote URL but it's possible to configure the environment variable `IMMVIS_DATASETS` with a folder path to enable the method `ListAvailableDatasets` to get all the datasets available for that folder.
+The method `LoadDataset` is currently able to load data sets using a local path or remote URL as `datasetPath` parameter. In order to ease the process of selecting the available data sets locally, the framework includes a function called `ListAvailableDatasets` that is able to scan any path set on the the environment variable `IMMVIS_DATASETS`. If this environment variable is not configured, the function will search for the files inside a folder named `datasets` on the root folder of this project.
 
 The supported formats are: CSV (with comma separator), XLS and JSON.
 
@@ -34,11 +33,10 @@ The supported formats are: CSV (with comma separator), XLS and JSON.
 
 * [Unity3D](https://github.com/imdavi/immvis-client-grpc-unity)
 
-## Adding new features
+## Tutorials
 
-If you are planning to add new features on the platform, please follow the following steps:
+* [Adding a new feature to ImmVis](docs/tutorial_add_new_feature.md)
 
-1. Create the required data structures or functions on the `proto/immvis.proto` file. If you want more information about how to do that, please check the [GRPC documentation](https://grpc.io/).
-1. Run the python libs generation scripts (`generate_python_libs.bat` or `generate_python_libs.sh`) to transform the definitions from the `proto/immvis.proto` definitions into Python bindings. 
-1. Extend the class `ImmVisServer` at `immvis/__main__.py` adding the functions created on the proto file. To have more details about how to use GRPC on Python please check this [link](https://grpc.github.io/grpc/python/). Please try to follow the implementation of current features for now, as there are plans to simplify the way of adding new features.
-1. Generate the libs for the clients that you are willing to use. Currently, we only provide a script to generate libs for C#/Unity3D (`generate_csharp_libs.bat` or `generate_csharp_libs.sh`). After generating these files, copy them to your project.
+## Contributing
+
+Our model of contribution is similar to the one described on https://github.com/firstcontributions/first-contributions, with the difference that members of IMDAVI don't need to create a fork from this repository, only create a branch here to submit their pull-requests.
