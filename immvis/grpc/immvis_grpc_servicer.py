@@ -29,3 +29,12 @@ class ImmvisGrpcServicer(immvis_pb2_grpc.ImmVisPandasServicer):
         normalised_data_frame = self._data_manager.get_normalised_dataset(columns_names)
 
         return NormalisedDataset(rows=list(map(lambda row: NormalisedRow(values=row), normalised_data_frame.values)))
+
+    def GenerateDataset(self, request, context):
+        columns_amount = request.columnsAmount
+        rows_amount = request.rowsAmount
+        centers_amount = request.centersAmount
+
+        dataset = self._data_manager.generate_dataset(columns_amount, rows_amount, centers_amount)
+
+        return get_dataset_metadata(dataset)

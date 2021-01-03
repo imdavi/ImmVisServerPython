@@ -1,6 +1,6 @@
 from pandas import DataFrame
 import typing
-from .utils import list_available_datasets, load_data_frame, normalise_data_frame
+from .utils import list_available_datasets, load_data_frame, normalise_data_frame, generate_data_frame
 
 
 class DataManager():
@@ -25,3 +25,7 @@ class DataManager():
             data_frame_to_normalise = self.data_frame
 
         return normalise_data_frame(data_frame_to_normalise)
+
+    def generate_dataset(self, columns_amount: int, rows_amount: int, centers_amount: int) -> DataFrame:
+        self.data_frame = generate_data_frame(columns_amount, rows_amount, centers_amount)
+        return self.data_frame

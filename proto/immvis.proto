@@ -4,6 +4,7 @@ service ImmVisPandas {
     rpc ListAvailableDatasets(Empty) returns (AvailableDatasetsList) {};
     rpc LoadDataset(LoadDatasetRequest) returns (DatasetMetadata) {};
     rpc GetNormalisedDataset(GetNormalisedDatasetRequest) returns (NormalisedDataset) {}
+    rpc GenerateDataset(GenerateDatasetRequest) returns (DatasetMetadata) {};
 }
 
 message Empty {}
@@ -14,6 +15,12 @@ message AvailableDatasetsList {
 
 message LoadDatasetRequest {
     string datasetPath = 1;
+}
+
+message GenerateDatasetRequest {
+    int32 columnsAmount = 1;
+    int32 rowsAmount = 2;
+    int32 centersAmount = 3;
 }
 
 message Column {

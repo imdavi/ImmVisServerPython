@@ -29,6 +29,11 @@ class ImmVisPandasStub(object):
         request_serializer=immvis__pb2.GetNormalisedDatasetRequest.SerializeToString,
         response_deserializer=immvis__pb2.NormalisedDataset.FromString,
         )
+    self.GenerateDataset = channel.unary_unary(
+        '/ImmVisPandas/GenerateDataset',
+        request_serializer=immvis__pb2.GenerateDatasetRequest.SerializeToString,
+        response_deserializer=immvis__pb2.DatasetMetadata.FromString,
+        )
 
 
 class ImmVisPandasServicer(object):
@@ -56,6 +61,13 @@ class ImmVisPandasServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def GenerateDataset(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_ImmVisPandasServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -73,6 +85,11 @@ def add_ImmVisPandasServicer_to_server(servicer, server):
           servicer.GetNormalisedDataset,
           request_deserializer=immvis__pb2.GetNormalisedDatasetRequest.FromString,
           response_serializer=immvis__pb2.NormalisedDataset.SerializeToString,
+      ),
+      'GenerateDataset': grpc.unary_unary_rpc_method_handler(
+          servicer.GenerateDataset,
+          request_deserializer=immvis__pb2.GenerateDatasetRequest.FromString,
+          response_serializer=immvis__pb2.DatasetMetadata.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
