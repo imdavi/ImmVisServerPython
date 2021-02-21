@@ -51,8 +51,14 @@ message GetNormalisedDatasetRequest {
 
 message NormalisedDataset {
     repeated NormalisedRow rows = 1;
+    repeated string columnsNames = 2;
+    repeated ColumnsLabels columnsLabels = 3;
 }
 
 message NormalisedRow {
     repeated float values = 1;
+}
+
+message ColumnsLabels {
+    repeated string labels = 1;
 }

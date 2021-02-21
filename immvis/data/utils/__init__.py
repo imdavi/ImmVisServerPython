@@ -2,3 +2,4 @@ from .available_datasets import list_available_datasets
 from .load_dataset import load_data_frame
 from .normalise_data_frame import normalise_data_frame
 from .generate_dataset import generate_data_frame
+from .get_columns_labels import get_columns_labels

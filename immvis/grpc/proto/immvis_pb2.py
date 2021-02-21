@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cimmvis.proto\"\x07\n\x05\x45mpty\".\n\x15\x41vailableDatasetsList\x12\x15\n\rdatasetsPaths\x18\x01 \x03(\t\")\n\x12LoadDatasetRequest\x12\x13\n\x0b\x64\x61tasetPath\x18\x01 \x01(\t\"Z\n\x16GenerateDatasetRequest\x12\x15\n\rcolumnsAmount\x18\x01 \x01(\x05\x12\x12\n\nrowsAmount\x18\x02 \x01(\x05\x12\x15\n\rcentersAmount\x18\x03 \x01(\x05\"*\n\x06\x43olumn\x12\x12\n\ncolumnName\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"P\n\x1c\x44\x65scriptiveStatisticsFeature\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x01(\t\"k\n\nColumnInfo\x12\x17\n\x06\x63olumn\x18\x01 \x01(\x0b\x32\x07.Column\x12\x44\n\x1d\x64\x65scriptiveStatisticsFeatures\x18\x02 \x03(\x0b\x32\x1d.DescriptiveStatisticsFeature\"\\\n\x0f\x44\x61tasetMetadata\x12\x11\n\trowsCount\x18\x01 \x01(\x05\x12\x14\n\x0c\x63olumnsCount\x18\x02 \x01(\x05\x12 \n\x0b\x63olumnsInfo\x18\x03 \x03(\x0b\x32\x0b.ColumnInfo\"3\n\x1bGetNormalisedDatasetRequest\x12\x14\n\x0c\x63olumnsNames\x18\x01 \x03(\t\"1\n\x11NormalisedDataset\x12\x1c\n\x04rows\x18\x01 \x03(\x0b\x32\x0e.NormalisedRow\"\x1f\n\rNormalisedRow\x12\x0e\n\x06values\x18\x01 \x03(\x02\x32\x8d\x02\n\x0cImmVisPandas\x12\x39\n\x15ListAvailableDatasets\x12\x06.Empty\x1a\x16.AvailableDatasetsList\"\x00\x12\x36\n\x0bLoadDataset\x12\x13.LoadDatasetRequest\x1a\x10.DatasetMetadata\"\x00\x12J\n\x14GetNormalisedDataset\x12\x1c.GetNormalisedDatasetRequest\x1a\x12.NormalisedDataset\"\x00\x12>\n\x0fGenerateDataset\x12\x17.GenerateDatasetRequest\x1a\x10.DatasetMetadata\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0cimmvis.proto\"\x07\n\x05\x45mpty\".\n\x15\x41vailableDatasetsList\x12\x15\n\rdatasetsPaths\x18\x01 \x03(\t\")\n\x12LoadDatasetRequest\x12\x13\n\x0b\x64\x61tasetPath\x18\x01 \x01(\t\"Z\n\x16GenerateDatasetRequest\x12\x15\n\rcolumnsAmount\x18\x01 \x01(\x05\x12\x12\n\nrowsAmount\x18\x02 \x01(\x05\x12\x15\n\rcentersAmount\x18\x03 \x01(\x05\"*\n\x06\x43olumn\x12\x12\n\ncolumnName\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"P\n\x1c\x44\x65scriptiveStatisticsFeature\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x01(\t\"k\n\nColumnInfo\x12\x17\n\x06\x63olumn\x18\x01 \x01(\x0b\x32\x07.Column\x12\x44\n\x1d\x64\x65scriptiveStatisticsFeatures\x18\x02 \x03(\x0b\x32\x1d.DescriptiveStatisticsFeature\"\\\n\x0f\x44\x61tasetMetadata\x12\x11\n\trowsCount\x18\x01 \x01(\x05\x12\x14\n\x0c\x63olumnsCount\x18\x02 \x01(\x05\x12 \n\x0b\x63olumnsInfo\x18\x03 \x03(\x0b\x32\x0b.ColumnInfo\"3\n\x1bGetNormalisedDatasetRequest\x12\x14\n\x0c\x63olumnsNames\x18\x01 \x03(\t\"n\n\x11NormalisedDataset\x12\x1c\n\x04rows\x18\x01 \x03(\x0b\x32\x0e.NormalisedRow\x12\x14\n\x0c\x63olumnsNames\x18\x02 \x03(\t\x12%\n\rcolumnsLabels\x18\x03 \x03(\x0b\x32\x0e.ColumnsLabels\"\x1f\n\rNormalisedRow\x12\x0e\n\x06values\x18\x01 \x03(\x02\"\x1f\n\rColumnsLabels\x12\x0e\n\x06labels\x18\x01 \x03(\t2\x8d\x02\n\x0cImmVisPandas\x12\x39\n\x15ListAvailableDatasets\x12\x06.Empty\x1a\x16.AvailableDatasetsList\"\x00\x12\x36\n\x0bLoadDataset\x12\x13.LoadDatasetRequest\x1a\x10.DatasetMetadata\"\x00\x12J\n\x14GetNormalisedDataset\x12\x1c.GetNormalisedDatasetRequest\x1a\x12.NormalisedDataset\"\x00\x12>\n\x0fGenerateDataset\x12\x17.GenerateDatasetRequest\x1a\x10.DatasetMetadata\"\x00\x62\x06proto3')
 )
 
 
@@ -368,6 +368,20 @@ _NORMALISEDDATASET = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='columnsNames', full_name='NormalisedDataset.columnsNames', index=1,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='columnsLabels', full_name='NormalisedDataset.columnsLabels', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -381,7 +395,7 @@ _NORMALISEDDATASET = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=590,
-  serialized_end=639,
+  serialized_end=700,
 )
 
 
@@ -411,14 +425,46 @@ _NORMALISEDROW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=641,
-  serialized_end=672,
+  serialized_start=702,
+  serialized_end=733,
+)
+
+
+_COLUMNSLABELS = _descriptor.Descriptor(
+  name='ColumnsLabels',
+  full_name='ColumnsLabels',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='labels', full_name='ColumnsLabels.labels', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=735,
+  serialized_end=766,
 )
 
 _COLUMNINFO.fields_by_name['column'].message_type = _COLUMN
 _COLUMNINFO.fields_by_name['descriptiveStatisticsFeatures'].message_type = _DESCRIPTIVESTATISTICSFEATURE
 _DATASETMETADATA.fields_by_name['columnsInfo'].message_type = _COLUMNINFO
 _NORMALISEDDATASET.fields_by_name['rows'].message_type = _NORMALISEDROW
+_NORMALISEDDATASET.fields_by_name['columnsLabels'].message_type = _COLUMNSLABELS
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['AvailableDatasetsList'] = _AVAILABLEDATASETSLIST
 DESCRIPTOR.message_types_by_name['LoadDatasetRequest'] = _LOADDATASETREQUEST
@@ -430,6 +476,7 @@ DESCRIPTOR.message_types_by_name['DatasetMetadata'] = _DATASETMETADATA
 DESCRIPTOR.message_types_by_name['GetNormalisedDatasetRequest'] = _GETNORMALISEDDATASETREQUEST
 DESCRIPTOR.message_types_by_name['NormalisedDataset'] = _NORMALISEDDATASET
 DESCRIPTOR.message_types_by_name['NormalisedRow'] = _NORMALISEDROW
+DESCRIPTOR.message_types_by_name['ColumnsLabels'] = _COLUMNSLABELS
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
@@ -509,6 +556,13 @@ NormalisedRow = _reflection.GeneratedProtocolMessageType('NormalisedRow', (_mess
   })
 _sym_db.RegisterMessage(NormalisedRow)
 
+ColumnsLabels = _reflection.GeneratedProtocolMessageType('ColumnsLabels', (_message.Message,), {
+  'DESCRIPTOR' : _COLUMNSLABELS,
+  '__module__' : 'immvis_pb2'
+  # @@protoc_insertion_point(class_scope:ColumnsLabels)
+  })
+_sym_db.RegisterMessage(ColumnsLabels)
+
 
 
 _IMMVISPANDAS = _descriptor.ServiceDescriptor(
@@ -517,8 +571,8 @@ _IMMVISPANDAS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=675,
-  serialized_end=944,
+  serialized_start=769,
+  serialized_end=1038,
   methods=[
   _descriptor.MethodDescriptor(
     name='ListAvailableDatasets',
