@@ -3,8 +3,9 @@ syntax = "proto3";
 service ImmVisPandas {
     rpc ListAvailableDatasets(Empty) returns (AvailableDatasetsList) {};
     rpc LoadDataset(LoadDatasetRequest) returns (DatasetMetadata) {};
-    rpc GetNormalisedDataset(GetNormalisedDatasetRequest) returns (NormalisedDataset) {}
+    rpc GetNormalisedDataset(GetNormalisedDatasetRequest) returns (NormalisedDataset) {};
     rpc GenerateDataset(GenerateDatasetRequest) returns (DatasetMetadata) {};
+    rpc DoKMeansAnalysis (KMeansAnalysisRequest) returns (KMeansAnalysisResponse);
 }
 
 message Empty {}
@@ -61,4 +62,14 @@ message NormalisedRow {
 
 message ColumnsLabels {
     repeated string labels = 1;
+}
+
+message KMeansAnalysisRequest {
+    repeated string columnsNames = 1;
+    int32 clustersNumber = 2;
+}
+
+message KMeansAnalysisResponse {
+    NormalisedDataset labelsMapping = 1;
+    NormalisedDataset centroids = 2;
 }

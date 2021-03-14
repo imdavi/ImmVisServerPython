@@ -1,6 +1,6 @@
 from pandas import DataFrame
 import typing
-from .utils import list_available_datasets, load_data_frame, normalise_data_frame, generate_data_frame, get_columns_labels
+from .utils import list_available_datasets, load_data_frame, normalise_data_frame, generate_data_frame, get_columns_labels, do_kmeans_analysis, KMeansAnalysisResult
 
 
 class DataManager():
@@ -36,3 +36,6 @@ class DataManager():
         self.data_frame = generate_data_frame(
             columns_amount, rows_amount, centers_amount)
         return self.data_frame
+
+    def do_kmeans_analysis(self, columns: typing.List[str], clusters_number: int) -> KMeansAnalysisResult:
+        return do_kmeans_analysis(self.get_selected_columns(columns), clusters_number)
