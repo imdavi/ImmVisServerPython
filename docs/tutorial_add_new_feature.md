@@ -7,8 +7,8 @@ The feature to be implemented is the `correlation matrix`, using the function [p
 ## Requirements
 
 - Operating system: Windows / Linux / Mac
-- Download the [ImmVisServerPython](https://github.com/imdavi/ImmVisServerPython) and follow its setup instructions
-- Download the [immvis-client-grpc-unity](https://github.com/imdavi/immvis-client-grpc-unity) and follow its setup instructions
+- Download the [ImmVisServerPython](https://github.com/imdavi/ImmVisServerPython) source code and follow its setup instructions
+- Download the [ImmVisClientLibraryUnity](https://github.com/imdavi/ImmVisClientLibraryUnity) source code and follow its setup instructions
 
 ## GRPC References
 
