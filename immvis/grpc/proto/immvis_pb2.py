@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cimmvis.proto\"\x07\n\x05\x45mpty\".\n\x15\x41vailableDatasetsList\x12\x15\n\rdatasetsPaths\x18\x01 \x03(\t\")\n\x12LoadDatasetRequest\x12\x13\n\x0b\x64\x61tasetPath\x18\x01 \x01(\t\"*\n\x06\x43olumn\x12\x12\n\ncolumnName\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"P\n\x1c\x44\x65scriptiveStatisticsFeature\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x01(\t\"k\n\nColumnInfo\x12\x17\n\x06\x63olumn\x18\x01 \x01(\x0b\x32\x07.Column\x12\x44\n\x1d\x64\x65scriptiveStatisticsFeatures\x18\x02 \x03(\x0b\x32\x1d.DescriptiveStatisticsFeature\"\\\n\x0f\x44\x61tasetMetadata\x12\x11\n\trowsCount\x18\x01 \x01(\x05\x12\x14\n\x0c\x63olumnsCount\x18\x02 \x01(\x05\x12 \n\x0b\x63olumnsInfo\x18\x03 \x03(\x0b\x32\x0b.ColumnInfo\"3\n\x1bGetNormalisedDatasetRequest\x12\x14\n\x0c\x63olumnsNames\x18\x01 \x03(\t\"1\n\x11NormalisedDataset\x12\x1c\n\x04rows\x18\x01 \x03(\x0b\x32\x0e.NormalisedRow\"\x1f\n\rNormalisedRow\x12\x0e\n\x06values\x18\x01 \x03(\x02\x32\xcd\x01\n\x0cImmVisPandas\x12\x39\n\x15ListAvailableDatasets\x12\x06.Empty\x1a\x16.AvailableDatasetsList\"\x00\x12\x36\n\x0bLoadDataset\x12\x13.LoadDatasetRequest\x1a\x10.DatasetMetadata\"\x00\x12J\n\x14GetNormalisedDataset\x12\x1c.GetNormalisedDatasetRequest\x1a\x12.NormalisedDataset\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0cimmvis.proto\"\x07\n\x05\x45mpty\".\n\x15\x41vailableDatasetsList\x12\x15\n\rdatasetsPaths\x18\x01 \x03(\t\")\n\x12LoadDatasetRequest\x12\x13\n\x0b\x64\x61tasetPath\x18\x01 \x01(\t\"Z\n\x16GenerateDatasetRequest\x12\x15\n\rcolumnsAmount\x18\x01 \x01(\x05\x12\x12\n\nrowsAmount\x18\x02 \x01(\x05\x12\x15\n\rcentersAmount\x18\x03 \x01(\x05\"*\n\x06\x43olumn\x12\x12\n\ncolumnName\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"P\n\x1c\x44\x65scriptiveStatisticsFeature\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x01(\t\"k\n\nColumnInfo\x12\x17\n\x06\x63olumn\x18\x01 \x01(\x0b\x32\x07.Column\x12\x44\n\x1d\x64\x65scriptiveStatisticsFeatures\x18\x02 \x03(\x0b\x32\x1d.DescriptiveStatisticsFeature\"\\\n\x0f\x44\x61tasetMetadata\x12\x11\n\trowsCount\x18\x01 \x01(\x05\x12\x14\n\x0c\x63olumnsCount\x18\x02 \x01(\x05\x12 \n\x0b\x63olumnsInfo\x18\x03 \x03(\x0b\x32\x0b.ColumnInfo\"3\n\x1bGetNormalisedDatasetRequest\x12\x14\n\x0c\x63olumnsNames\x18\x01 \x03(\t\"n\n\x11NormalisedDataset\x12\x1c\n\x04rows\x18\x01 \x03(\x0b\x32\x0e.NormalisedRow\x12\x14\n\x0c\x63olumnsNames\x18\x02 \x03(\t\x12%\n\rcolumnsLabels\x18\x03 \x03(\x0b\x32\x0e.ColumnsLabels\"\x1f\n\rNormalisedRow\x12\x0e\n\x06values\x18\x01 \x03(\x02\"\x1f\n\rColumnsLabels\x12\x0e\n\x06labels\x18\x01 \x03(\t\"E\n\x15KMeansAnalysisRequest\x12\x14\n\x0c\x63olumnsNames\x18\x01 \x03(\t\x12\x16\n\x0e\x63lustersNumber\x18\x02 \x01(\x05\"j\n\x16KMeansAnalysisResponse\x12)\n\rlabelsMapping\x18\x01 \x01(\x0b\x32\x12.NormalisedDataset\x12%\n\tcentroids\x18\x02 \x01(\x0b\x32\x12.NormalisedDataset2\xd2\x02\n\x0cImmVisPandas\x12\x39\n\x15ListAvailableDatasets\x12\x06.Empty\x1a\x16.AvailableDatasetsList\"\x00\x12\x36\n\x0bLoadDataset\x12\x13.LoadDatasetRequest\x1a\x10.DatasetMetadata\"\x00\x12J\n\x14GetNormalisedDataset\x12\x1c.GetNormalisedDatasetRequest\x1a\x12.NormalisedDataset\"\x00\x12>\n\x0fGenerateDataset\x12\x17.GenerateDatasetRequest\x1a\x10.DatasetMetadata\"\x00\x12\x43\n\x10\x44oKMeansAnalysis\x12\x16.KMeansAnalysisRequest\x1a\x17.KMeansAnalysisResponseb\x06proto3')
 )
 
 
@@ -112,6 +112,51 @@ _LOADDATASETREQUEST = _descriptor.Descriptor(
 )
 
 
+_GENERATEDATASETREQUEST = _descriptor.Descriptor(
+  name='GenerateDatasetRequest',
+  full_name='GenerateDatasetRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='columnsAmount', full_name='GenerateDatasetRequest.columnsAmount', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rowsAmount', full_name='GenerateDatasetRequest.rowsAmount', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='centersAmount', full_name='GenerateDatasetRequest.centersAmount', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=116,
+  serialized_end=206,
+)
+
+
 _COLUMN = _descriptor.Descriptor(
   name='Column',
   full_name='Column',
@@ -145,8 +190,8 @@ _COLUMN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=116,
-  serialized_end=158,
+  serialized_start=208,
+  serialized_end=250,
 )
 
 
@@ -190,8 +235,8 @@ _DESCRIPTIVESTATISTICSFEATURE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=160,
-  serialized_end=240,
+  serialized_start=252,
+  serialized_end=332,
 )
 
 
@@ -228,8 +273,8 @@ _COLUMNINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=242,
-  serialized_end=349,
+  serialized_start=334,
+  serialized_end=441,
 )
 
 
@@ -273,8 +318,8 @@ _DATASETMETADATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=351,
-  serialized_end=443,
+  serialized_start=443,
+  serialized_end=535,
 )
 
 
@@ -304,8 +349,8 @@ _GETNORMALISEDDATASETREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=445,
-  serialized_end=496,
+  serialized_start=537,
+  serialized_end=588,
 )
 
 
@@ -323,6 +368,20 @@ _NORMALISEDDATASET = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='columnsNames', full_name='NormalisedDataset.columnsNames', index=1,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='columnsLabels', full_name='NormalisedDataset.columnsLabels', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -335,8 +394,8 @@ _NORMALISEDDATASET = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=498,
-  serialized_end=547,
+  serialized_start=590,
+  serialized_end=700,
 )
 
 
@@ -366,17 +425,128 @@ _NORMALISEDROW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=549,
-  serialized_end=580,
+  serialized_start=702,
+  serialized_end=733,
+)
+
+
+_COLUMNSLABELS = _descriptor.Descriptor(
+  name='ColumnsLabels',
+  full_name='ColumnsLabels',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='labels', full_name='ColumnsLabels.labels', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=735,
+  serialized_end=766,
+)
+
+
+_KMEANSANALYSISREQUEST = _descriptor.Descriptor(
+  name='KMeansAnalysisRequest',
+  full_name='KMeansAnalysisRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='columnsNames', full_name='KMeansAnalysisRequest.columnsNames', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='clustersNumber', full_name='KMeansAnalysisRequest.clustersNumber', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=768,
+  serialized_end=837,
+)
+
+
+_KMEANSANALYSISRESPONSE = _descriptor.Descriptor(
+  name='KMeansAnalysisResponse',
+  full_name='KMeansAnalysisResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='labelsMapping', full_name='KMeansAnalysisResponse.labelsMapping', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='centroids', full_name='KMeansAnalysisResponse.centroids', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=839,
+  serialized_end=945,
 )
 
 _COLUMNINFO.fields_by_name['column'].message_type = _COLUMN
 _COLUMNINFO.fields_by_name['descriptiveStatisticsFeatures'].message_type = _DESCRIPTIVESTATISTICSFEATURE
 _DATASETMETADATA.fields_by_name['columnsInfo'].message_type = _COLUMNINFO
 _NORMALISEDDATASET.fields_by_name['rows'].message_type = _NORMALISEDROW
+_NORMALISEDDATASET.fields_by_name['columnsLabels'].message_type = _COLUMNSLABELS
+_KMEANSANALYSISRESPONSE.fields_by_name['labelsMapping'].message_type = _NORMALISEDDATASET
+_KMEANSANALYSISRESPONSE.fields_by_name['centroids'].message_type = _NORMALISEDDATASET
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['AvailableDatasetsList'] = _AVAILABLEDATASETSLIST
 DESCRIPTOR.message_types_by_name['LoadDatasetRequest'] = _LOADDATASETREQUEST
+DESCRIPTOR.message_types_by_name['GenerateDatasetRequest'] = _GENERATEDATASETREQUEST
 DESCRIPTOR.message_types_by_name['Column'] = _COLUMN
 DESCRIPTOR.message_types_by_name['DescriptiveStatisticsFeature'] = _DESCRIPTIVESTATISTICSFEATURE
 DESCRIPTOR.message_types_by_name['ColumnInfo'] = _COLUMNINFO
@@ -384,6 +554,9 @@ DESCRIPTOR.message_types_by_name['DatasetMetadata'] = _DATASETMETADATA
 DESCRIPTOR.message_types_by_name['GetNormalisedDatasetRequest'] = _GETNORMALISEDDATASETREQUEST
 DESCRIPTOR.message_types_by_name['NormalisedDataset'] = _NORMALISEDDATASET
 DESCRIPTOR.message_types_by_name['NormalisedRow'] = _NORMALISEDROW
+DESCRIPTOR.message_types_by_name['ColumnsLabels'] = _COLUMNSLABELS
+DESCRIPTOR.message_types_by_name['KMeansAnalysisRequest'] = _KMEANSANALYSISREQUEST
+DESCRIPTOR.message_types_by_name['KMeansAnalysisResponse'] = _KMEANSANALYSISRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
@@ -406,6 +579,13 @@ LoadDatasetRequest = _reflection.GeneratedProtocolMessageType('LoadDatasetReques
   # @@protoc_insertion_point(class_scope:LoadDatasetRequest)
   })
 _sym_db.RegisterMessage(LoadDatasetRequest)
+
+GenerateDatasetRequest = _reflection.GeneratedProtocolMessageType('GenerateDatasetRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GENERATEDATASETREQUEST,
+  '__module__' : 'immvis_pb2'
+  # @@protoc_insertion_point(class_scope:GenerateDatasetRequest)
+  })
+_sym_db.RegisterMessage(GenerateDatasetRequest)
 
 Column = _reflection.GeneratedProtocolMessageType('Column', (_message.Message,), {
   'DESCRIPTOR' : _COLUMN,
@@ -456,6 +636,27 @@ NormalisedRow = _reflection.GeneratedProtocolMessageType('NormalisedRow', (_mess
   })
 _sym_db.RegisterMessage(NormalisedRow)
 
+ColumnsLabels = _reflection.GeneratedProtocolMessageType('ColumnsLabels', (_message.Message,), {
+  'DESCRIPTOR' : _COLUMNSLABELS,
+  '__module__' : 'immvis_pb2'
+  # @@protoc_insertion_point(class_scope:ColumnsLabels)
+  })
+_sym_db.RegisterMessage(ColumnsLabels)
+
+KMeansAnalysisRequest = _reflection.GeneratedProtocolMessageType('KMeansAnalysisRequest', (_message.Message,), {
+  'DESCRIPTOR' : _KMEANSANALYSISREQUEST,
+  '__module__' : 'immvis_pb2'
+  # @@protoc_insertion_point(class_scope:KMeansAnalysisRequest)
+  })
+_sym_db.RegisterMessage(KMeansAnalysisRequest)
+
+KMeansAnalysisResponse = _reflection.GeneratedProtocolMessageType('KMeansAnalysisResponse', (_message.Message,), {
+  'DESCRIPTOR' : _KMEANSANALYSISRESPONSE,
+  '__module__' : 'immvis_pb2'
+  # @@protoc_insertion_point(class_scope:KMeansAnalysisResponse)
+  })
+_sym_db.RegisterMessage(KMeansAnalysisResponse)
+
 
 
 _IMMVISPANDAS = _descriptor.ServiceDescriptor(
@@ -464,8 +665,8 @@ _IMMVISPANDAS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=583,
-  serialized_end=788,
+  serialized_start=948,
+  serialized_end=1286,
   methods=[
   _descriptor.MethodDescriptor(
     name='ListAvailableDatasets',
@@ -492,6 +693,24 @@ _IMMVISPANDAS = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETNORMALISEDDATASETREQUEST,
     output_type=_NORMALISEDDATASET,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GenerateDataset',
+    full_name='ImmVisPandas.GenerateDataset',
+    index=3,
+    containing_service=None,
+    input_type=_GENERATEDATASETREQUEST,
+    output_type=_DATASETMETADATA,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='DoKMeansAnalysis',
+    full_name='ImmVisPandas.DoKMeansAnalysis',
+    index=4,
+    containing_service=None,
+    input_type=_KMEANSANALYSISREQUEST,
+    output_type=_KMEANSANALYSISRESPONSE,
     serialized_options=None,
   ),
 ])

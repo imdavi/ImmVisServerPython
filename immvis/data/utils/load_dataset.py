@@ -3,6 +3,7 @@ from .extension_utils import is_csv, is_excel, is_json
 from os.path import join, isfile
 from pandas import DataFrame, read_csv, read_excel, read_json
 
+_NA_VALUES = ['null', 'NULL', 'nan', 'NaN']
 
 class UnknownDatasetType(Exception):
     pass
@@ -25,7 +26,7 @@ def _open_dataset_file(file_path: str) -> DataFrame:
     data_frame = None
 
     if is_csv(file_path):
-        data_frame = read_csv(file_path)
+        data_frame = read_csv(file_path, sep=';', index_col=0, na_values=_NA_VALUES)
     elif is_json(file_path):
         data_frame = read_json(file_path)
     elif is_excel(file_path):
