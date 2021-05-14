@@ -1,27 +1,26 @@
-
 # Tutorial:  Adding a new feature to ImmVis
 
 This tutorial shows how to implements a new feature to the ImmVis framework on the server and Unity client library.
 
-The feature to be implemented is the `correlation matrix`, were the function [pandas.DataFrame.corr](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html) will be used to find the correlation between the dimensions of a given dataset.
+The feature to be implemented is the `correlation matrix`, using the function [pandas.DataFrame.corr](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html) to find the correlation between the dimensions of a given dataset.
 
 ## Requirements
 
 - Operating system: Windows / Linux / Mac
-- Download the [immvis-server-grpc](https://github.com/imdavi/immvis-server-grpc) and follow its setup instructions
+- Download the [ImmVisServerPython](https://github.com/imdavi/ImmVisServerPython) and follow its setup instructions
 - Download the [immvis-client-grpc-unity](https://github.com/imdavi/immvis-client-grpc-unity) and follow its setup instructions
 
 ## GRPC References
 
-Adding a new feature on ImmVis consists in adding a new GRPC service on the server side (Python) and then updating the client library (Unity) with the new implemented function.
+Adding a new feature on ImmVis consists of adding a new GRPC service on the server-side (Python) and then updating the client library (Unity) with the newly implemented function.
 
-For more references about how to use GRPC please refer to the GRPC documentation for [Python](https://grpc.io/docs/languages/python/basics/) and [C#](https://grpc.io/docs/languages/csharp/basics/).
+For more references about how to use GRPC, please refer to the GRPC documentation for [Python](https://grpc.io/docs/languages/python/basics/) and [C#](https://grpc.io/docs/languages/csharp/basics/).
 
 If you want to implement a client in any other language, please refer to the [GRPC Supported Languages documentation](https://grpc.io/docs/languages/).
 
-## Creating the feature on immvis-server-grpc (server) 
+## Creating the feature on ImmVisServerPython
 
-1. On the `immvis-server-grpc`, add the code below to the DataManager class (`immvis/data/data_manager.py`). Please follow the same identation of the other functions.
+1. On the `ImmVisServerPython` folder, add the code below to the DataManager class (`immvis/data/data_manager.py`). Please follow the exact indentation of the other functions.
 
 ```python
     def get_correlation_matrix(self):
@@ -38,7 +37,7 @@ service ImmVisPandas {
 }
 ```
 
-Our function will be called `GetCorrelationMatrix`, will receive an `Empty` parameter and will return a `CorrelationMatrix` (that will be described on the next step.) If you need to receive other parameters instead of `Empty` please refer to the other existing functions about how to create custom parameters for your function. 
+We will call our function `GetCorrelationMatrix`,  making it receive an `Empty` parameter and return a `CorrelationMatrix`. If you need to add other parameters than `Empty`, please refer to the other existing functions to create custom parameters for your case. We also recommend visiting the gRPC documentation mentioned earlier.
 
 3. Create the `CorrelationMatrix` and `CorrelationMatrixRow` messages at the end of the proto file (`proto\immvis.proto`):
 ```proto
@@ -58,7 +57,7 @@ message CorrelationMatrixRow {
 5. Open the file `immvis\grpc\proto\immvis_pb2_grpc.py` and change the line `import immvis_pb2 as immvis__pb2` to `from . import immvis_pb2 as immvis__pb2`. Ignore the other errors and save the file. We are currently working to make this step automatic in the future.
 
 6. Create the file `immvis\grpc\mappers\correlation_matrix.py` with the following content:
-```python
+```Python
 from ..proto.immvis_pb2 import CorrelationMatrix, CorrelationMatrixRow
 from pandas import DataFrame, Series
 
@@ -116,6 +115,6 @@ var correlationMatrix = await grpcClient.GetCorrelationMatrix(new Empty());
 Debug.Log($"Using:\n{correlationMatrix}");
 
 ```
-5. [Run the server](https://github.com/imdavi/immvis-server-grpc#running-the-server) and then run the Unity3D project to check the project will build properly.
+5. [Run the server](https://github.com/imdavi/immvis-server-grpc#running-the-server) and then run the Unity3D project to check the project will build correctly.
 
-6. If everything worked properly, the project will run and the log will be printed on the Unity console.
+6. If everything worked correctly, the project will run, with logs available on the Unity console.

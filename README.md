@@ -1,41 +1,36 @@
 # ImmVis (Server)
 
-This is the server side project from ImmVis, a platform that aims to connect different data visualization platforms to a data analysis service written in Python.
+This is the server side project from ImmVis, an open-source framework that aims to provide data services to Immersive Analytics. The framework is built on top of [gRPC](https://grpc.io/), enabling different platforms and programming languages to use the data analysis libraries from Python ecosystem.
 
-## Solution archictecture
+## Tutorials
 
-The platform consists into a GRPC server that exposes some data analysis functions from Python, specifically from [Pandas](https://github.com/pandas-dev/pandas) and [scikit-learn](https://scikit-learn.org). The intent of this is to use Python data analysis capabilities on development environments that aren't to good for that.
-
-Here is a really small architecture diagram about how it works:
-
-![Image of Yaktocat](imgs/highlevel-architecture.png)
-
-## Setup
-
-To develop for the server side, you should have installed [Python](https://www.python.org/) (3.6+) and [PIP](https://pypi.org/project/pip/) (latest version available). 
-
-If you already have them installed, please install the Python dependencies listed at `requirements.txt` file. If you are not sure how to do that, please run or take a look at the scripts `install_python_dependencies.bat` (Windows) and `install_python_dependencies.sh` (Linux/MacOS) available on the `utilities` folder.
+* [ImmVis Server Setup](docs/tutorial_setup.md)
+* [Adding a new feature to ImmVis](docs/tutorial_add_new_feature.md)
 
 ## Running the server
 
-Currently there are two ways of running the server: 
+After doing the [ImmVis Server Setup](docs/tutorial_setup.md), you could running the server using one of the following options: 
 
 * From the root directory of the project run the following command: `python -m immvis.grpc`
 * Open the root folder with [Visual Studio Code](https://code.visualstudio.com/) and run the debug task `Python: Immvis Grpc`
 
-## Loading data sets
+## Client Libraries
 
-The method `LoadDataset` is currently able to load data sets using a local path or remote URL as `datasetPath` parameter. In order to ease the process of selecting the available data sets locally, the framework includes a function called `ListAvailableDatasets` that is able to scan any path set on the the environment variable `IMMVIS_DATASETS`. If this environment variable is not configured, the function will search for the files inside a folder named `datasets` on the root folder of this project.
+To use the ImmVis server with your application you have two options:
 
-The supported formats are: CSV (with comma separator), XLS and JSON.
+* Generate the gRPC code using the [Protobuf services definition file](./proto/immvis.proto) and use it inside your application. Please refer to [gRPC documentation](https://grpc.io/docs/languages/) for more details about how to do it for your programming language.
+* Integrate one of the available client libraries to your project:
+  * [Unity3D](https://github.com/imdavi/immvis-client-grpc-unity)
 
-## Available Client Libraries:
+## Supported dataset formats
 
-* [Unity3D](https://github.com/imdavi/immvis-client-grpc-unity)
+Currently, ImmVis uses [pandas](https://pandas.pydata.org/) to load datasets with the following formats:
 
-## Tutorials
+* CSV (with semicolon separator)
+* XLS
+* JSON
 
-* [Adding a new feature to ImmVis](docs/tutorial_add_new_feature.md)
+If you need to change or configure something with pandas to load your dataset (e.g, change the separator), please refer to the [load_dataset.py](./immvis/data/utils/load_dataset.py) file.
 
 ## Contributing
 
