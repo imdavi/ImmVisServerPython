@@ -1,6 +1,7 @@
 from pandas import DataFrame, Series
 from ..proto.immvis_pb2 import DatasetMetadata, Column, ColumnInfo, DescriptiveStatisticsFeature
 import typing
+import numpy as np
 
 def get_dataset_metadata(data_frame: DataFrame) -> DatasetMetadata:
     return DatasetMetadata(
@@ -21,6 +22,9 @@ def _get_column_info(data_frame: DataFrame, column_label: str) -> typing.List[Co
 
 def _map_feature(column_descriptive_statistics: Series, feature_name: str) -> DescriptiveStatisticsFeature:
     feature_value = column_descriptive_statistics[feature_name]
+
+    if(np.issubdtype(column_descriptive_statistics.dtype, np.floating)):
+        feature_value = round(feature_value, 5)
 
     return DescriptiveStatisticsFeature(
         name = feature_name,
