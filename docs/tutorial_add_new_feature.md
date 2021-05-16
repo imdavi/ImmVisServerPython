@@ -6,7 +6,7 @@ The feature to be implemented is the `correlation matrix`, using the function [p
 
 ## Requirements
 
-- Operating system: Windows / Linux / Mac
+- Operating system: Windows, Linux, or macOS
 - Download the [ImmVisServerPython](https://github.com/imdavi/ImmVisServerPython) source code and follow its setup instructions
 - Download the [ImmVisClientLibraryUnity](https://github.com/imdavi/ImmVisClientLibraryUnity) source code and follow its setup instructions
 

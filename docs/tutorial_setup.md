@@ -4,7 +4,7 @@ This tutorial covers how to set up and run ImmVis Python Server.
 
 ## Requirements
 
-- Operating system: Windows / Linux / Mac
+- Operating system: Windows, Linux, or macOS
 - Install Python 3.8 or earlier ([download link](https://www.python.org/downloads/))
 - Install `pip` ([download link](https://pypi.org/project/pip/))
 
@@ -40,4 +40,4 @@ If the variable is not available, the framework will look for datasets inside a 
 
 This project was developed using [Visual Studio Code](https://code.visualstudio.com/) but feel free to use any Python IDE from your preference.
 
-If you are using Visual Studio code, please note that we included the launch configuration `Python: Immvis Grpc`in order to ease the development process.
+If you are using Visual Studio Code, please note that we included the launch configuration `Python: Immvis Grpc` to ease the development process.
