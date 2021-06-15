@@ -13,7 +13,7 @@ This tutorial covers how to set up and run ImmVis Python Server.
 1. Clone [ImmVisServerPython](https://github.com/imdavi/ImmVisServerPython) or download its source code
 1. Open a terminal and navigate to the folder where the code was cloned/downloaded
 1. Install the [required dependencies](../requirements.txt) by using the `install_python_dependencies`script available on [utilities folder](../utilities) or running the command `pip install -r requirements.txt`
-1. Still inside the project folder, run the command `python3 -m immvis`.
+1. Still inside the project folder, run the command `python3 -m immvis.grpc`.
 1. If everything worked fine, you are going to see the following output on the terminal: 
 ```shell
 Creating DataManager
