@@ -5,7 +5,7 @@ This tutorial covers how to set up and run ImmVis Python Server.
 ## Requirements
 
 - Operating system: Windows, Linux, or macOS
-- Install Python 3.8 or earlier ([download link](https://www.python.org/downloads/))
+- Install Python 3.8 ([download link](https://www.python.org/downloads/))
 - Install `pip` ([download link](https://pypi.org/project/pip/))
 
 ## Running ImmVis Server
