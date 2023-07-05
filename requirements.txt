@@ -1,7 +1,7 @@
 wheel
 pandas
 protobuf
-grpcio==1.26.0
+grpcio==1.53.0
 grpcio-tools==1.26.0
 numpy
 xlrd
